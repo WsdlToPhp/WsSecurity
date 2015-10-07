@@ -41,7 +41,7 @@ class Security extends Element
         /**
          * Sets attributes
          */
-        if ($mustunderstand == true) {
+        if ($mustunderstand === true) {
             $this->setAttribute(self::ATTRIBUTE_MUST_UNDERSTAND, $mustunderstand);
         }
         if (!empty($actor)) {

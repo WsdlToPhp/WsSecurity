@@ -8,7 +8,6 @@
 [![Dependency Status](https://www.versioneye.com/user/projects/5615103ca19334001e000331/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5615103ca19334001e000331)
 [![StyleCI](https://styleci.io/repos/43811404/shield)](https://styleci.io/repos/43811404)
 
-```
 ## Unit tests
 You can run the unit tests with the following command:
 ```

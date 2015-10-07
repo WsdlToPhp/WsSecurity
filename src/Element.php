@@ -124,7 +124,6 @@ class Element
         return $this;
     }
     /**
-     * @param array $attributes
      * @return bool true|false
      */
     public function hasAttributes()
@@ -146,10 +145,8 @@ class Element
         switch ($this->getNamespace()) {
             case self::NS_WSSE:
                 return self::NS_WSSE_NAME;
-                break;
             case self::NS_WSSU:
                 return self::NS_WSSU_NAME;
-                break;
         }
     }
     /**
