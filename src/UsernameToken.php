@@ -126,16 +126,16 @@ class UsernameToken extends Element
     {
         $value = array();
         if ($this->getUsername() instanceof Username) {
-            array_push($value, $this->getUsername());
+            $value[] = $this->getUsername();
         }
         if ($this->getPassword() instanceof Password) {
-            array_push($value, $this->getPassword());
+            $value[] = $this->getPassword();
         }
         if ($this->getCreated() instanceof Created) {
-            array_push($value, $this->getCreated());
+            $value[] = $this->getCreated();
         }
         if ($this->getNonce() instanceof Nonce) {
-            array_push($value, $this->getNonce());
+            $value[] = $this->getNonce();
         }
         if (count($value) > 0) {
             $this->setValue($value);

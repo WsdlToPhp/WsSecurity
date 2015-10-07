@@ -90,10 +90,10 @@ class Security extends Element
     {
         $value = array();
         if ($this->getUsernameToken()) {
-            array_push($value, $this->getUsernameToken());
+            $value[] = $this->getUsernameToken();
         }
         if ($this->getTimestamp()) {
-            array_push($value, $this->getTimestamp());
+            $value[] = $this->getTimestamp();
         }
         if (count($value)) {
             $this->setValue($value);

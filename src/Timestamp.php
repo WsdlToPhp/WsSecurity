@@ -69,10 +69,10 @@ class Timestamp extends Element
     {
         $value = array();
         if ($this->getCreated() instanceof Created) {
-            array_push($value, $this->getCreated());
+            $value[] = $this->getCreated();
         }
         if ($this->getExpires() instanceof Expires) {
-            array_push($value, $this->getExpires());
+            $value[] = $this->getExpires();
         }
         if (count($value) > 0) {
             $this->setValue($value);

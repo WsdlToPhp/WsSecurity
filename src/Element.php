@@ -260,26 +260,40 @@ class Element
      * @param mixed $value
      * @param \DOMElement $element
      */
-    private function appendValueToElementToSend($value, \DOMElement $element)
+    protected function appendValueToElementToSend($value, \DOMElement $element)
     {
         if ($value instanceof Element) {
-            $value = $value->__toSend(true, false);
-            if ($value instanceof \DOMNode) {
-                $element->appendChild($value);
-            }
+            $this->appendElementToElementToSend($value, $element);
         } elseif (is_array($value)) {
-            foreach ($value as $value) {
-                $this->appendValueToElementToSend($value, $element);
-            }
+            $this->appendValuesToElementToSend($value, $element);
         } else {
             $element->appendChild(self::getDom()->createTextNode($value));
+        }
+    }
+    /**
+     * @param Element $element
+     * @param \DOMElement $element
+     */
+    protected function appendElementToElementToSend(Element $element, \DOMElement $element) {
+        $value = $value->__toSend(true, false);
+        if ($value instanceof \DOMNode) {
+            $element->appendChild($value);
+        }
+    }
+    /**
+     * @param array $values
+     * @param \DOMElement $element
+     */
+    protected function appendValuesToElementToSend(array $values, \DOMElement $element) {
+        foreach ($values as $value) {
+            $this->appendValueToElementToSend($value, $element);
         }
     }
     /**
      * Returns the name with its namespace
      * @return string
      */
-    private function getNamespacedName()
+    protected function getNamespacedName()
     {
         return sprintf('%s:%s', $this->getNamespacePrefix(), $this->getName());
     }
