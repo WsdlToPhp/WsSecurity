@@ -11,18 +11,18 @@ class WsSecurity
     /**
      * @param string $username
      * @param string $password
-     * @param string $passwordDigest
+     * @param bool $passwordDigest
      * @param int $addCreated
      * @param int $addExpires
      * @param string $returnSoapHeader
-     * @param string $mustunderstand
+     * @param bool $mustunderstand
      * @param string $actor
      */
-    protected function __construct($username, $password, $passwordDigest = false, $addCreated = 0, $addExpires = 0, $returnSoapHeader = true, $mustunderstand = false, $actor = null)
+    protected function __construct($username, $password, $passwordDigest = false, $addCreated = 0, $addExpires = 0, $mustunderstand = false, $actor = null)
     {
         $this
             ->initSecurity($mustunderstand, $actor)
-            ->setUsernameToken()
+            ->setUsernameToken($username)
             ->setPassword($password, $passwordDigest, $addCreated)
             ->setNonce()
             ->setCreated($addCreated)
@@ -57,7 +57,7 @@ class WsSecurity
      */
     public static function createWsSecuritySoapHeader($username, $password, $passwordDigest = false, $addCreated = 0, $addExpires = 0, $returnSoapHeader = true, $mustunderstand = false, $actor = null)
     {
-        $self = new WsSecurity($username, $password, $passwordDigest, $addCreated, $addExpires, $returnSoapHeader, $mustunderstand, $actor);
+        $self = new WsSecurity($username, $password, $passwordDigest, $addCreated, $addExpires, $mustunderstand, $actor);
         if ($returnSoapHeader) {
             if (!empty($actor)) {
                 return new \SoapHeader(Element::NS_WSSE, 'Security', new \SoapVar($self->getSecurity()->toSend(), XSD_ANYXML), $mustunderstand, $actor);
@@ -69,16 +69,19 @@ class WsSecurity
         }
     }
     /**
+     * @param string $username
      * @return WsSecurity
      */
-    protected function setUsernameToken()
+    protected function setUsernameToken($username)
     {
-        $this->security->setUsernameToken(new UsernameToken());
+        $usernameToken = new UsernameToken();
+        $usernameToken->setUsername(new Username($username));
+        $this->security->setUsernameToken();
         return this;
     }
     /**
      * @param string $password
-     * @param string $passwordDigest
+     * @param bool $passwordDigest
      * @param int $addCreated
      * @return WsSecurity
      */
