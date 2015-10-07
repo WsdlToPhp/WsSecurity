@@ -224,10 +224,9 @@ class Element
     /**
      * Method called to generate the string XML request to be sent among the SOAP Header
      * @param bool $asDomElement returns elements as a \DOMElement or as a string
-     * @param bool $rootNode OPTIONAL, don't pass the parameter
      * @return string|\DOMElement
      */
-    protected function __toSend($asDomElement = false, $rootNode = true)
+    protected function __toSend($asDomElement = false)
     {
         /**
          * Create element tag
@@ -271,11 +270,11 @@ class Element
      * @param Element $element
      * @param \DOMElement $element
      */
-    protected function appendElementToElementToSend(Element $element, \DOMElement $element)
+    protected function appendElementToElementToSend(Element $value, \DOMElement $element)
     {
-        $value = $value->__toSend(true, false);
-        if ($value instanceof \DOMNode) {
-            $element->appendChild($value);
+        $toSend = $value->__toSend(true, false);
+        if ($toSend instanceof \DOMNode) {
+            $element->appendChild($toSend);
         }
     }
     /**

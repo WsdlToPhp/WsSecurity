@@ -83,10 +83,9 @@ class Security extends Element
     /**
      * Overrides methods in order to set the values
      * @param bool $asDomElement returns elements as a DOMElement or as a string
-     * @param bool $rootNode OPTIONAL, don't pass the parameter
      * @return string
      */
-    protected function __toSend($asDomElement = false, $rootNode = true)
+    protected function __toSend($asDomElement = false)
     {
         $value = array();
         if ($this->getUsernameToken()) {
@@ -98,6 +97,6 @@ class Security extends Element
         if (count($value)) {
             $this->setValue($value);
         }
-        return parent::__toSend($asDomElement = false, $rootNode);
+        return parent::__toSend($asDomElement = false);
     }
 }

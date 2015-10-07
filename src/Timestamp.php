@@ -62,10 +62,9 @@ class Timestamp extends Element
     /**
      * Overrides method in order to add created and expires values if they are set
      * @param bool $asDomElement returns elements as a DOMElement or as a string
-     * @param bool $rootNode OPTIONAL, don't pass the parameter
      * @return string
      */
-    protected function __toSend($asDomElement = false, $rootNode = true)
+    protected function __toSend($asDomElement = false)
     {
         $value = array();
         if ($this->getCreated() instanceof Created) {
@@ -77,6 +76,6 @@ class Timestamp extends Element
         if (count($value) > 0) {
             $this->setValue($value);
         }
-        return parent::__toSend($asDomElement, $rootNode);
+        return parent::__toSend($asDomElement);
     }
 }
