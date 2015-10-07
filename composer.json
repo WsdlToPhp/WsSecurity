@@ -1,5 +1,5 @@
 {
-	"name" : "wsdltophp/wssecurity/WsSecurity",
+	"name" : "wsdltophp/wssecurity",
 	"description" : "Allows to easily add Ws Security header to a SOAP Request",
 	"type" : "library",
 	"keywords" : ["soap","php","wsse"],
