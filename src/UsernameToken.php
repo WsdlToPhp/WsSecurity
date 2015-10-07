@@ -112,33 +112,17 @@ class UsernameToken extends Element
     }
     /**
      * Overrides method in order to add username, password and created values if they are set
-     * @see Element::toSend()
-     * @uses Element::setValue()
-     * @uses UsernameToken::getUsername()
-     * @uses UsernameToken::getPassword()
-     * @uses UsernameToken::getCreated()
-     * @uses UsernameToken::getNonce()
      * @param bool $asDomElement returns elements as a DOMElement or as a string
      * @return string
      */
     protected function __toSend($asDomElement = false)
     {
-        $value = array();
-        if ($this->getUsername() instanceof Username) {
-            $value[] = $this->getUsername();
-        }
-        if ($this->getPassword() instanceof Password) {
-            $value[] = $this->getPassword();
-        }
-        if ($this->getCreated() instanceof Created) {
-            $value[] = $this->getCreated();
-        }
-        if ($this->getNonce() instanceof Nonce) {
-            $value[] = $this->getNonce();
-        }
-        if (count($value) > 0) {
-            $this->setValue($value);
-        }
+        $this->setValue(array(
+            $this->getUsername(),
+            $this->getPassword(),
+            $this->getCreated(),
+            $this->getNonce(),
+        ));
         return parent::__toSend($asDomElement);
     }
 }

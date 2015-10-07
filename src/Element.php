@@ -261,7 +261,7 @@ class Element
             $this->appendElementToElementToSend($value, $element);
         } elseif (is_array($value)) {
             $this->appendValuesToElementToSend($value, $element);
-        } else {
+        } elseif (!empty($value)) {
             $element->appendChild(self::getDom()->createTextNode($value));
         }
         return $this;

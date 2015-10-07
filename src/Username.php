@@ -11,7 +11,6 @@ class Username extends Element
     const NAME = 'Username';
     /**
      * Constructor for Username element
-     * @see Element::__construct()
      * @param string $username the username
      * @param string $namespace the namespace
      */

@@ -66,16 +66,10 @@ class Timestamp extends Element
      */
     protected function __toSend($asDomElement = false)
     {
-        $value = array();
-        if ($this->getCreated() instanceof Created) {
-            $value[] = $this->getCreated();
-        }
-        if ($this->getExpires() instanceof Expires) {
-            $value[] = $this->getExpires();
-        }
-        if (count($value) > 0) {
-            $this->setValue($value);
-        }
+        $this->setValue(array(
+            $this->getCreated(),
+            $this->getExpires(),
+        ));
         return parent::__toSend($asDomElement);
     }
 }
