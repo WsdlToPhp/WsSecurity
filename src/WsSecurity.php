@@ -25,7 +25,7 @@ class WsSecurity
             ->setPassword($password, $passwordDigest, $addCreated)
             ->setNonce()
             ->setCreated($addCreated)
-            ->setTimestamp();
+            ->setTimestamp($addCreated, $addExpires);
     }
     /**
      * @param bool $mustunderstand
