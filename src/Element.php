@@ -272,7 +272,7 @@ class Element
      */
     protected function appendElementToElementToSend(Element $value, \DOMElement $element)
     {
-        $toSend = $value->__toSend(true, false);
+        $toSend = $value->__toSend(true);
         if ($toSend instanceof \DOMElement) {
             $element->appendChild($toSend);
         }
