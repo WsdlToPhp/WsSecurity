@@ -236,16 +236,11 @@ class Element
         $element->setAttributeNS('http://www.w3.org/2000/xmlns/', sprintf('xmlns:%s', $this->getNamespacePrefix()), $this->getNamespace());
         /**
          * Define element value
+         * Add attributes if there are any
          */
-        $this->appendValueToElementToSend($this->getValue(), $element);
-        /**
-         * Add attributs if there are any
-         */
-        if ($this->hasAttributes()) {
-            foreach ($this->getAttributes() as $attributeName=>$attributeValue) {
-                $element->setAttribute($attributeName, $attributeValue);
-            }
-        }
+        $this
+            ->appendValueToElementToSend($this->getValue(), $element)
+            ->appendAttributesToElementToSend($element);
         /**
          * Returns element content
          */
@@ -259,6 +254,7 @@ class Element
      * Handle adding value to element according to the value type
      * @param mixed $value
      * @param \DOMElement $element
+     * @return Element
      */
     protected function appendValueToElementToSend($value, \DOMElement $element)
     {
@@ -269,6 +265,7 @@ class Element
         } else {
             $element->appendChild(self::getDom()->createTextNode($value));
         }
+        return $this;
     }
     /**
      * @param Element $element
@@ -290,6 +287,19 @@ class Element
         foreach ($values as $value) {
             $this->appendValueToElementToSend($value, $element);
         }
+    }
+    /**
+     * @param \DOMElement $element
+     * @return Element
+     */
+    protected function appendAttributesToElementToSend(\DOMElement $element)
+    {
+        if ($this->hasAttributes()) {
+            foreach ($this->getAttributes() as $attributeName=>$attributeValue) {
+                $element->setAttribute($attributeName, $attributeValue);
+            }
+        }
+        return $this;
     }
     /**
      * Returns the name with its namespace
