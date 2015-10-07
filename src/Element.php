@@ -274,7 +274,8 @@ class Element
      * @param Element $element
      * @param \DOMElement $element
      */
-    protected function appendElementToElementToSend(Element $element, \DOMElement $element) {
+    protected function appendElementToElementToSend(Element $element, \DOMElement $element)
+    {
         $value = $value->__toSend(true, false);
         if ($value instanceof \DOMNode) {
             $element->appendChild($value);
@@ -284,7 +285,8 @@ class Element
      * @param array $values
      * @param \DOMElement $element
      */
-    protected function appendValuesToElementToSend(array $values, \DOMElement $element) {
+    protected function appendValuesToElementToSend(array $values, \DOMElement $element)
+    {
         foreach ($values as $value) {
             $this->appendValueToElementToSend($value, $element);
         }
