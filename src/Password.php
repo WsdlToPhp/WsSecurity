@@ -44,7 +44,7 @@ class Password extends Element
     {
         $this
             ->setTypeValue($typeValue)
-            ->setTimestampValue($timestampValue?$timestampValue:time())
+            ->setTimestampValue($timestampValue ? $timestampValue : time())
             ->setNonceValue(mt_rand());
         parent::__construct(self::NAME, $namespace, $this->convertPassword($password), array(
             self::ATTRIBUTE_TYPE => $typeValue,
