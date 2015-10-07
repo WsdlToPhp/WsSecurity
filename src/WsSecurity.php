@@ -14,7 +14,6 @@ class WsSecurity
      * @param bool $passwordDigest
      * @param int $addCreated
      * @param int $addExpires
-     * @param string $returnSoapHeader
      * @param bool $mustunderstand
      * @param string $actor
      */
@@ -76,7 +75,7 @@ class WsSecurity
     {
         $usernameToken = new UsernameToken();
         $usernameToken->setUsername(new Username($username));
-        $this->security->setUsernameToken();
+        $this->security->setUsernameToken($usernameToken);
         return this;
     }
     /**
