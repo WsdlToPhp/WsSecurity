@@ -44,7 +44,7 @@ The `WsSecurity::createWsSecuritySoapHeader` parameters are defined in this orde
 - **$usernameId**: the id to attach to the UsernameToken element, optional
 
 ## Unit tests
-You can run the unit tests with the following command:
+You can run the unit tests with the following command at the root directory of this project:
 ```
 $ phpunit
 ```
