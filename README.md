@@ -14,10 +14,10 @@ This repository contains multiple classes that may be used indepdently but for n
 
 The WsSecurity class provides a static method that takes the parameters that should suffice to create your Ws-Security Username Authentication header required in your SOAP request.
 
-Concretly, you must include this repository in your project using composer then use it such as:
+Concretly, you must include this repository in your project using composer (`composer require wsdltophp/wssecurity:dev-master`) then use it such as:
 
 ```php
-use WsdlTophp\WsSecurity\WsSecurity;
+use WsdlToPhp\WsSecurity\WsSecurity;
 
 /**
  * @var \SoapHeader
