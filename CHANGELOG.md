@@ -1,10 +1,8 @@
 # CHANGELOG
 
-## 0.0.2
+## 1.0.0
+Initial release:
 - WsSecurity fixes
 - Unit tests added
 - Username id added on header creation
 - Update readme
-
-## 0.0.1
-- Initial version.
