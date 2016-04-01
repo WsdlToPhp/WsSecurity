@@ -43,7 +43,7 @@ class UsernameToken extends Element
     public function __construct($id = null, $namespace = self::NS_WSSE)
     {
         parent::__construct(self::NAME, $namespace, null, empty($id) ? array() : array(
-            self::ATTRIBUTE_ID => $id,
+            sprintf('%s:%s', parent::NS_WSSU_NAME, self::ATTRIBUTE_ID) => $id,
         ));
     }
     /**
