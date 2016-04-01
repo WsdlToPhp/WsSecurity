@@ -16,12 +16,13 @@ class WsSecurity
      * @param int $addExpires
      * @param bool $mustunderstand
      * @param string $actor
+     * @param string $usernameId
      */
-    protected function __construct($username, $password, $passwordDigest = false, $addCreated = 0, $addExpires = 0, $mustunderstand = false, $actor = null)
+    protected function __construct($username, $password, $passwordDigest = false, $addCreated = 0, $addExpires = 0, $mustunderstand = false, $actor = null, $usernameId = null)
     {
         $this
             ->initSecurity($mustunderstand, $actor)
-            ->setUsernameToken($username)
+            ->setUsernameToken($username, $usernameId)
             ->setPassword($password, $passwordDigest, $addCreated)
             ->setNonce()
             ->setCreated($addCreated)
@@ -30,6 +31,7 @@ class WsSecurity
     /**
      * @param bool $mustunderstand
      * @param string $actor
+     * @return WsSecurity
      */
     protected function initSecurity($mustunderstand = false, $actor = null)
     {
@@ -52,11 +54,12 @@ class WsSecurity
      * @param int $addExpires
      * @param bool $mustunderstand
      * @param string $actor
-     * @return SoapHeader|SoapVar
+     * @param string $usernameId
+     * @return \SoapHeader|\SoapVar
      */
-    public static function createWsSecuritySoapHeader($username, $password, $passwordDigest = false, $addCreated = 0, $addExpires = 0, $returnSoapHeader = true, $mustunderstand = false, $actor = null)
+    public static function createWsSecuritySoapHeader($username, $password, $passwordDigest = false, $addCreated = 0, $addExpires = 0, $returnSoapHeader = true, $mustunderstand = false, $actor = null, $usernameId = null)
     {
-        $self = new WsSecurity($username, $password, $passwordDigest, $addCreated, $addExpires, $mustunderstand, $actor);
+        $self = new WsSecurity($username, $password, $passwordDigest, $addCreated, $addExpires, $mustunderstand, $actor, $usernameId);
         if ($returnSoapHeader) {
             if (!empty($actor)) {
                 return new \SoapHeader(Element::NS_WSSE, 'Security', new \SoapVar($self->getSecurity()->toSend(), XSD_ANYXML), $mustunderstand, $actor);
@@ -69,14 +72,15 @@ class WsSecurity
     }
     /**
      * @param string $username
+     * @param string $usernameId
      * @return WsSecurity
      */
-    protected function setUsernameToken($username)
+    protected function setUsernameToken($username, $usernameId = null)
     {
-        $usernameToken = new UsernameToken();
+        $usernameToken = new UsernameToken($usernameId);
         $usernameToken->setUsername(new Username($username));
         $this->security->setUsernameToken($usernameToken);
-        return this;
+        return $this;
     }
     /**
      * @param string $password
@@ -87,7 +91,7 @@ class WsSecurity
     protected function setPassword($password, $passwordDigest = false, $addCreated = 0)
     {
         $this->getUsernameToken()->setPassword(new Password($password, $passwordDigest ? Password::TYPE_PASSWORD_DIGEST : Password::TYPE_PASSWORD_TEXT, is_bool($addCreated) ? 0 : ($addCreated > 0 ? $addCreated : 0)));
-        return this;
+        return $this;
     }
     /**
      * @return WsSecurity
@@ -95,8 +99,8 @@ class WsSecurity
     protected function setNonce()
     {
         $nonceValue = $this->getPassword()->getNonceValue();
-        if ($nonceValue instanceof Nonce) {
-            $this->getUsernameToken()->setNonce($nonceValue);
+        if (!empty($nonceValue)) {
+            $this->getUsernameToken()->setNonce(new Nonce($nonceValue));
         }
         return $this;
     }

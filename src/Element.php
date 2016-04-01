@@ -142,12 +142,16 @@ class Element
      */
     private function getNamespacePrefix()
     {
+        $namespacePrefix = '';
         switch ($this->getNamespace()) {
             case self::NS_WSSE:
-                return self::NS_WSSE_NAME;
+                $namespacePrefix = self::NS_WSSE_NAME;
+                break;
             case self::NS_WSSU:
-                return self::NS_WSSU_NAME;
+                $namespacePrefix = self::NS_WSSU_NAME;
+                break;
         }
+        return $namespacePrefix;
     }
     /**
      * @param string $namespace
