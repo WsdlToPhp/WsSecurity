@@ -36,11 +36,11 @@ The `WsSecurity::createWsSecuritySoapHeader` parameters are defined in this orde
 - **$username**: your login/username
 - **$password**: your password
 - **$passwordDigest**: set it to `true` if your password must be encrypted
-- **$addCreated**: set it to the time you created this header using `time()` for example, otherwise pass 0
+- **$addCreated**: set it to the time you created this header using the PHP [time](http://php.net/manual/en/function.time.php) function for example, otherwise pass 0
 - **$addExpires**: set it to the number of seconds in which the header will expire, 0 otherwise
 - **$returnSoapHeader**: set it to false if you want to get the [\SoapVar](http://php.net/manual/en/class.soapvar.php) object that is used to create the [\SoapHeader](http://php.net/manual/en/class.soapheader.php) object, then you'll have to use to create by yourself the [\SoapHeader](http://php.net/manual/en/class.soapheader.php) object
-- **$mustunderstand**: classic option of the [\SoapClient](http://php.net/manual/fr/soapclient.soapclient.php) class
-- **$actor**: classic option of the [\SoapClient](http://php.net/manual/fr/soapclient.soapclient.php) class
+- **$mustunderstand**: classic option of the [\SoapClient](http://php.net/manual/en/soapclient.soapclient.php) class
+- **$actor**: classic option of the [\SoapClient](http://php.net/manual/en/soapclient.soapclient.php) class
 - **$usernameId**: the id to attach to the UsernameToken element, optional
 
 ## Unit tests
