@@ -91,6 +91,6 @@ class Security extends Element
             $this->getUsernameToken(),
             $this->getTimestamp(),
         ));
-        return parent::__toSend($asDomElement = false);
+        return parent::__toSend($asDomElement);
     }
 }
