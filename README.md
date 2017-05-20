@@ -8,6 +8,7 @@
 [![Total Downloads](https://poser.pugx.org/wsdltophp/wssecurity/downloads)](https://packagist.org/packages/wsdltophp/wssecurity)
 [![Dependency Status](https://www.versioneye.com/user/projects/5615103ca19334001e000331/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5615103ca19334001e000331)
 [![StyleCI](https://styleci.io/repos/43811404/shield)](https://styleci.io/repos/43811404)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/1cc28292-0f49-47eb-b2ca-4bdd6c0223f1/mini.png)](https://insight.sensiolabs.com/projects/1cc28292-0f49-47eb-b2ca-4bdd6c0223f1)
 
 ## How to use it
 This repository contains multiple classes that may be used indepdently but for now it is easier/better to only use the WsSecurity class.
