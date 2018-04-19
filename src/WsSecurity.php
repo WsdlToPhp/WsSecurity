@@ -96,7 +96,7 @@ class WsSecurity
         return $this;
     }
     /**
-     * @param  $addNonce
+     * @param  bool $addNonce
      * @return WsSecurity
      */
     protected function setNonce($addNonce)
