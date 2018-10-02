@@ -101,9 +101,9 @@ class WsSecurity
      */
     protected function setNonce($addNonce)
     {
-        if ($addNonce){
+        if ($addNonce) {
             $nonceValue = $this->getPassword()->getNonceValue();
-            if (!empty($nonceValue)){
+            if (!empty($nonceValue)) {
                 $this->getUsernameToken()->setNonce(new Nonce($nonceValue));
             }
         }
