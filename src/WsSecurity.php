@@ -103,8 +103,7 @@ class WsSecurity
     {
         if ($addNonce){
             $nonceValue = $this->getPassword()->getNonceValue();
-            if (!empty($nonceValue))
-            {
+            if (!empty($nonceValue)){
                 $this->getUsernameToken()->setNonce(new Nonce($nonceValue));
             }
         }
