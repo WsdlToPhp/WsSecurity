@@ -15,6 +15,11 @@
             "name": "Alexey Anisimov",
             "email": "mne@lexa.in",
             "role": "Contributor"
+        },
+        {
+            "name": "Tom Vaughan",
+            "email": "tom.vaughan@farpoint.com",
+            "role": "Contributor"
         }
     ],
     "support" : {
