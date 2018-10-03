@@ -33,7 +33,7 @@ $soapClient->__setSoapHeaders($soapHeader);
 $soapClient->__soapCall('echoVoid', []);
 ```
 
-The `WsSecurity::createWsSecuritySoapHeader` parameters are defined in this order `($username, $password, $passwordDigest = false, $addCreated = 0, $addExpires = 0, $returnSoapHeader = true, $mustunderstand = false, $actor = null, $usernameId = null)`:
+The `WsSecurity::createWsSecuritySoapHeader` parameters are defined in this order `($username, $password, $passwordDigest = false, $addCreated = 0, $addExpires = 0, $returnSoapHeader = true, $mustunderstand = false, $actor = null, $usernameId = null, $addNonce = true)`:
 
 - **$username**: your login/username
 - **$password**: your password
@@ -44,11 +44,12 @@ The `WsSecurity::createWsSecuritySoapHeader` parameters are defined in this orde
 - **$mustunderstand**: classic option of the [\SoapClient](http://php.net/manual/en/soapclient.soapclient.php) class
 - **$actor**: classic option of the [\SoapClient](http://php.net/manual/en/soapclient.soapclient.php) class
 - **$usernameId**: the id to attach to the UsernameToken element, optional
+- **$addNonce**: _true_ by default, if true, it adds the nonce element to the header, if false it does not add the nonce element to the header 
 
 ## Unit tests
 You can run the unit tests with the following command at the root directory of this project:
 ```
-$ phpunit
+$ composer test
 ```
 
 ## Feedback
