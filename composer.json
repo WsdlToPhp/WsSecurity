@@ -10,6 +10,11 @@
             "email": "contact@wsdltophp.com",
             "homepage": "https://www.wsdltophp.com",
             "role": "Owner"
+        },
+        {
+            "name": "Alexey Anisimov",
+            "email": "mne@lexa.in",
+            "role": "Contributor"
         }
     ],
     "support" : {
