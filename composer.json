@@ -16,8 +16,12 @@
         "email" : "contact@wsdltophp.com"
     },
     "require" : {
-        "php" : ">=5.3",
+        "php" : ">=5.4",
         "ext-soap": "*"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "lint": "vendor/bin/php-cs-fixer fix"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8 || ^6.0",
@@ -25,7 +29,11 @@
     },
     "autoload" : {
         "psr-4" : {
-            "WsdlToPhp\\WsSecurity\\" : "src",
+            "WsdlToPhp\\WsSecurity\\" : "src"
+        }
+    },
+    "autoload-dev" : {
+        "psr-4" : {
             "WsdlToPhp\\WsSecurity\\Tests\\": "tests"
         }
     }

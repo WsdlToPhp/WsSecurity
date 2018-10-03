@@ -7,11 +7,11 @@ abstract class TestCase extends PHPUnitFrameworkTestCase
 {
     public static function innerTrim($string)
     {
-        return trim(preg_replace('/>\s*</', '><', str_replace(array(
+        return trim(preg_replace('/>\s*</', '><', str_replace([
             "\r",
             "\n",
-            "\t"
-        ), '', $string)));
+            "\t",
+        ], '', $string)));
     }
     public static function assertMatches($pattern, $string)
     {

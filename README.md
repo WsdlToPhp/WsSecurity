@@ -1,12 +1,13 @@
-# WsdlToPhp WsSecurity
+# WsSecurity
+
+> WsSecurity adds the WSSE authentication header to your SOAP request
+
 [![License](https://poser.pugx.org/wsdltophp/wssecurity/license)](https://packagist.org/packages/wsdltophp/wssecurity)
 [![Latest Stable Version](https://poser.pugx.org/wsdltophp/wssecurity/version.png)](https://packagist.org/packages/wsdltophp/wssecurity)
 [![Build Status](https://api.travis-ci.org/WsdlToPhp/WsSecurity.svg)](https://travis-ci.org/WsdlToPhp/WsSecurity)
-[![PHP 7 ready](http://php7ready.timesplinter.ch/WsdlToPhp/PackageGenerator/badge.svg)](https://travis-ci.org/WsdlToPhp/PackageGenerator)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/WsdlToPhp/WsSecurity/badges/quality-score.png)](https://scrutinizer-ci.com/g/WsdlToPhp/WsSecurity/)
 [![Code Coverage](https://scrutinizer-ci.com/g/WsdlToPhp/WsSecurity/badges/coverage.png)](https://scrutinizer-ci.com/g/WsdlToPhp/WsSecurity/)
 [![Total Downloads](https://poser.pugx.org/wsdltophp/wssecurity/downloads)](https://packagist.org/packages/wsdltophp/wssecurity)
-[![Dependency Status](https://www.versioneye.com/user/projects/5615103ca19334001e000331/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5615103ca19334001e000331)
 [![StyleCI](https://styleci.io/repos/43811404/shield)](https://styleci.io/repos/43811404)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/1cc28292-0f49-47eb-b2ca-4bdd6c0223f1/mini.png)](https://insight.sensiolabs.com/projects/1cc28292-0f49-47eb-b2ca-4bdd6c0223f1)
 
@@ -15,7 +16,7 @@ This repository contains multiple classes that may be used indepdently but for n
 
 The WsSecurity class provides a static method that takes the parameters that should suffice to create your Ws-Security Username Authentication header required in your SOAP request.
 
-Concretly, you must include this repository in your project using composer (`composer require wsdltophp/wssecurity:dev-master`) then use it such as:
+Concretly, you must include this repository in your project using composer (`composer require wsdltophp/wssecurity`) then use it such as:
 
 ```php
 use WsdlToPhp\WsSecurity\WsSecurity;
