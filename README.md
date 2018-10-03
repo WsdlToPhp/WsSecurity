@@ -30,7 +30,7 @@ $soapHeader = WsSecurity::createWsSecuritySoapHeader('login', 'password', true);
  */
 $soapClient = new \SoapClient('wsdl_url');
 $soapClient->__setSoapHeaders($soapHeader);
-$client->__soapCall('echoVoid', null);
+$soapClient->__soapCall('echoVoid', []);
 ```
 
 The `WsSecurity::createWsSecuritySoapHeader` parameters are defined in this order `($username, $password, $passwordDigest = false, $addCreated = 0, $addExpires = 0, $returnSoapHeader = true, $mustunderstand = false, $actor = null, $usernameId = null)`:
