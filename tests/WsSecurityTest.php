@@ -108,4 +108,17 @@ class WsSecurityTest extends TestCase
             </wsse:UsernameToken>
         </wsse:Security>'), $header->data->enc_value);
     }
+    public function testCreateWithoutNonce()
+    {
+        $header = WsSecurity::createWsSecuritySoapHeader('foo', 'bar', false, 1459451824, 0, true, true, 'BAR', 'X90I3u8', false);
+        $this->assertInstanceOf('\SoapHeader', $header);
+        $this->assertMatches(self::innerTrim('
+        <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" SOAP-ENV:mustunderstand="1" SOAP-ENV:actor="BAR">
+            <wsse:UsernameToken wssu:Id="X90I3u8">
+                <wsse:Username>foo</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">bar</wsse:Password>
+                <wssu:Created xmlns:wssu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-03-31T19:17:04Z</wssu:Created>
+            </wsse:UsernameToken>
+        </wsse:Security>'), $header->data->enc_value);
+    }
 }
