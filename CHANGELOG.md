@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.1.0
+- Provide Docker settings
+- Merged PR #2 and #4
+- Fixed issue #3
+- Drop support of PHP 5.3
+- Update contributors list
+- Update lint options
+
 ## 1.0.1
 - Improve code, add SensioLabs Insight badge, remove useless value
 

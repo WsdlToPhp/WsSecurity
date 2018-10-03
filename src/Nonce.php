@@ -26,9 +26,9 @@ class Nonce extends Element
      */
     public function __construct($nonce, $namespace = self::NS_WSSE)
     {
-        parent::__construct(self::NAME, $namespace, self::encodeNonce($nonce), array(
+        parent::__construct(self::NAME, $namespace, self::encodeNonce($nonce), [
             self::ATTRIBUTE_ENCODING_TYPE => self::NS_ENCODING,
-        ));
+        ]);
     }
     /**
      * Encode Nonce value

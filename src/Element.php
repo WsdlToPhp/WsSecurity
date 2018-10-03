@@ -45,7 +45,7 @@ class Element
      * Array of attributes that must contains the element
      * @var array
      */
-    protected $attributes = array();
+    protected $attributes = [];
     /**
      * The namespace the element belongs to
      * @var string
@@ -73,7 +73,7 @@ class Element
      * @param mixed $value
      * @param array $attributes
      */
-    public function __construct($name, $namespace, $value = null, array $attributes = array())
+    public function __construct($name, $namespace, $value = null, array $attributes = [])
     {
         $this
             ->setName($name)
@@ -298,7 +298,7 @@ class Element
     protected function appendAttributesToElementToSend(\DOMElement $element)
     {
         if ($this->hasAttributes()) {
-            foreach ($this->getAttributes() as $attributeName=>$attributeValue) {
+            foreach ($this->getAttributes() as $attributeName => $attributeValue) {
                 $element->setAttribute($attributeName, $attributeValue);
             }
         }

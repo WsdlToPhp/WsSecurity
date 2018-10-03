@@ -42,9 +42,9 @@ class UsernameToken extends Element
      */
     public function __construct($id = null, $namespace = self::NS_WSSE)
     {
-        parent::__construct(self::NAME, $namespace, null, empty($id) ? array() : array(
+        parent::__construct(self::NAME, $namespace, null, empty($id) ? [] : [
             sprintf('%s:%s', parent::NS_WSSU_NAME, self::ATTRIBUTE_ID) => $id,
-        ));
+        ]);
     }
     /**
      * @return Username
@@ -117,12 +117,12 @@ class UsernameToken extends Element
      */
     protected function __toSend($asDomElement = false)
     {
-        $this->setValue(array(
+        $this->setValue([
             $this->getUsername(),
             $this->getPassword(),
             $this->getCreated(),
             $this->getNonce(),
-        ));
+        ]);
         return parent::__toSend($asDomElement);
     }
 }

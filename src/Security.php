@@ -87,10 +87,10 @@ class Security extends Element
      */
     protected function __toSend($asDomElement = false)
     {
-        $this->setValue(array(
+        $this->setValue([
             $this->getUsernameToken(),
             $this->getTimestamp(),
-        ));
+        ]);
         return parent::__toSend($asDomElement);
     }
 }
