@@ -13,12 +13,12 @@ class Security extends Element
      * Element attribute mustunderstand name
      * @var string
      */
-    const ATTRIBUTE_MUST_UNDERSTAND = 'SOAP-ENV:mustunderstand';
+    const ATTRIBUTE_MUST_UNDERSTAND = ':mustunderstand';
     /**
      * Element attribute mustunderstand name
      * @var string
      */
-    const ATTRIBUTE_ACTOR = 'SOAP-ENV:actor';
+    const ATTRIBUTE_ACTOR = ':actor';
     /**
      * UsernameToken element
      * @var UsernameToken
@@ -29,23 +29,26 @@ class Security extends Element
      * @var Timestamp
      */
     protected $timestamp;
+
     /**
      * Constructor for Nonce element
-     * @param bool $mustunderstand
+     *
+     * @param bool   $mustunderstand
      * @param string $actor
+     * @param string $envelopeNamespace
      * @param string $namespace the namespace
      */
-    public function __construct($mustunderstand = false, $actor = null, $namespace = self::NS_WSSE)
+    public function __construct($mustunderstand = false, $actor = null, $envelopeNamespace, $namespace = self::NS_WSSE)
     {
         parent::__construct(self::NAME, $namespace);
         /**
          * Sets attributes
          */
         if ($mustunderstand === true) {
-            $this->setAttribute(self::ATTRIBUTE_MUST_UNDERSTAND, $mustunderstand);
+            $this->setAttribute($envelopeNamespace. self::ATTRIBUTE_MUST_UNDERSTAND, $mustunderstand);
         }
         if (!empty($actor)) {
-            $this->setAttribute(self::ATTRIBUTE_ACTOR, $actor);
+            $this->setAttribute($envelopeNamespace . self::ATTRIBUTE_ACTOR, $actor);
         }
     }
     /**
