@@ -138,7 +138,6 @@ class WsSecurityTest extends TestCase
             'env');
 
         $this->assertInstanceOf('\SoapHeader', $header);
-        var_export($header->data->enc_value);
         $this->assertMatches(self::innerTrim('
         <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" env:mustunderstand="1" env:actor="BAR">
             <wsse:UsernameToken>

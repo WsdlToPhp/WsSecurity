@@ -31,7 +31,7 @@ class WsSecurity
         $actor = null,
         $usernameId = null,
         $addNonce = true,
-        $envelopeNamespace = 'SOAP-ENV'
+        $envelopeNamespace = Security::ENV_NAMESPACE
     ) {
         $this
             ->initSecurity($mustunderstand, $actor, $envelopeNamespace)
@@ -49,9 +49,9 @@ class WsSecurity
      *
      * @return WsSecurity
      */
-    protected function initSecurity($mustunderstand = false, $actor = null, $envelopeNamespace)
+    protected function initSecurity($mustunderstand = false, $actor = null, $envelopeNamespace = Security::ENV_NAMESPACE)
     {
-        $this->security = new Security($mustunderstand, $actor, $envelopeNamespace);
+        $this->security = new Security($mustunderstand, $actor, Security::NS_WSSE, $envelopeNamespace);
         return $this;
     }
     /**

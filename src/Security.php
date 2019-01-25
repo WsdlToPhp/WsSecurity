@@ -20,6 +20,11 @@ class Security extends Element
      */
     const ATTRIBUTE_ACTOR = ':actor';
     /**
+     * Envelop namespace
+     * @var string
+     */
+    const ENV_NAMESPACE = 'SOAP-ENV';
+    /**
      * UsernameToken element
      * @var UsernameToken
      */
@@ -38,7 +43,7 @@ class Security extends Element
      * @param string $envelopeNamespace
      * @param string $namespace the namespace
      */
-    public function __construct($mustunderstand = false, $actor = null, $envelopeNamespace, $namespace = self::NS_WSSE)
+    public function __construct($mustunderstand = false, $actor = null, $namespace = self::NS_WSSE, $envelopeNamespace = self::ENV_NAMESPACE)
     {
         parent::__construct(self::NAME, $namespace);
         /**
