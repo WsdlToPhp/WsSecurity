@@ -91,7 +91,7 @@ class Security extends Element
     /**
      * Overrides methods in order to set the values
      * @param bool $asDomElement returns elements as a DOMElement or as a string
-     * @return string
+     * @return string|\DOMElement
      */
     protected function __toSend($asDomElement = false)
     {
