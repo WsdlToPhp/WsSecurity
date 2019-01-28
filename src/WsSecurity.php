@@ -90,7 +90,7 @@ class WsSecurity
         $actor = null,
         $usernameId = null,
         $addNonce = true,
-        $envelopeNamespace = 'SOAP-ENV'
+        $envelopeNamespace = Security::ENV_NAMESPACE
     ) {
         $self = new WsSecurity($username, $password, $passwordDigest, $addCreated, $addExpires, $mustunderstand, $actor, $usernameId, $addNonce, $envelopeNamespace);
         if ($returnSoapHeader) {
