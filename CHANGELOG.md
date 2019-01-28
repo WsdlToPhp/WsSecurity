@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.2.0
+- Merged PR #5
+- Fix minor typo
+
 ## 1.1.0
 - Provide Docker settings
 - Merged PR #2 and #4
