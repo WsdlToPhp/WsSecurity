@@ -8,35 +8,50 @@ class WsSecurity
      * @var Security
      */
     protected $security;
+
     /**
      * @param string $username
      * @param string $password
-     * @param bool $passwordDigest
-     * @param int $addCreated
-     * @param int $addExpires
-     * @param bool $mustunderstand
+     * @param bool   $passwordDigest
+     * @param int    $addCreated
+     * @param int    $addExpires
+     * @param bool   $mustunderstand
      * @param string $actor
      * @param string $usernameId
-     * @param bool $addNonce
+     * @param bool   $addNonce
+     * @param string $envelopeNamespace
      */
-    protected function __construct($username, $password, $passwordDigest = false, $addCreated = 0, $addExpires = 0, $mustunderstand = false, $actor = null, $usernameId = null, $addNonce = true)
-    {
+    protected function __construct(
+        $username,
+        $password,
+        $passwordDigest = false,
+        $addCreated = 0,
+        $addExpires = 0,
+        $mustunderstand = false,
+        $actor = null,
+        $usernameId = null,
+        $addNonce = true,
+        $envelopeNamespace = Security::ENV_NAMESPACE
+    ) {
         $this
-            ->initSecurity($mustunderstand, $actor)
+            ->initSecurity($mustunderstand, $actor, $envelopeNamespace)
             ->setUsernameToken($username, $usernameId)
             ->setPassword($password, $passwordDigest, $addCreated)
             ->setNonce($addNonce)
             ->setCreated($addCreated)
             ->setTimestamp($addCreated, $addExpires);
     }
+
     /**
-     * @param bool $mustunderstand
+     * @param bool   $mustunderstand
      * @param string $actor
+     * @param string $envelopeNamespace
+     *
      * @return WsSecurity
      */
-    protected function initSecurity($mustunderstand = false, $actor = null)
+    protected function initSecurity($mustunderstand = false, $actor = null, $envelopeNamespace = Security::ENV_NAMESPACE)
     {
-        $this->security = new Security($mustunderstand, $actor);
+        $this->security = new Security($mustunderstand, $actor, Security::NS_WSSE, $envelopeNamespace);
         return $this;
     }
     /**
@@ -46,22 +61,38 @@ class WsSecurity
     {
         return $this->security;
     }
+
     /**
      * Create the SoapHeader object to send as SoapHeader in the SOAP request.
+     *
      * @param string $username
      * @param string $password
-     * @param bool $passwordDigest
-     * @param int $addCreated
-     * @param int $addExpires
-     * @param bool $mustunderstand
+     * @param bool   $passwordDigest
+     * @param int    $addCreated
+     * @param int    $addExpires
+     * @param bool   $returnSoapHeader
+     * @param bool   $mustunderstand
      * @param string $actor
      * @param string $usernameId
-     * @param bool $addNonce
+     * @param bool   $addNonce
+     * @param string $envelopeNamespace
+     *
      * @return \SoapHeader|\SoapVar
      */
-    public static function createWsSecuritySoapHeader($username, $password, $passwordDigest = false, $addCreated = 0, $addExpires = 0, $returnSoapHeader = true, $mustunderstand = false, $actor = null, $usernameId = null, $addNonce = true)
-    {
-        $self = new WsSecurity($username, $password, $passwordDigest, $addCreated, $addExpires, $mustunderstand, $actor, $usernameId, $addNonce);
+    public static function createWsSecuritySoapHeader(
+        $username,
+        $password,
+        $passwordDigest = false,
+        $addCreated = 0,
+        $addExpires = 0,
+        $returnSoapHeader = true,
+        $mustunderstand = false,
+        $actor = null,
+        $usernameId = null,
+        $addNonce = true,
+        $envelopeNamespace = Security::ENV_NAMESPACE
+    ) {
+        $self = new WsSecurity($username, $password, $passwordDigest, $addCreated, $addExpires, $mustunderstand, $actor, $usernameId, $addNonce, $envelopeNamespace);
         if ($returnSoapHeader) {
             if (!empty($actor)) {
                 return new \SoapHeader(Element::NS_WSSE, 'Security', new \SoapVar($self->getSecurity()->toSend(), XSD_ANYXML), $mustunderstand, $actor);

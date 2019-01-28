@@ -20,6 +20,10 @@
             "name": "Tom Vaughan",
             "email": "tom.vaughan@farpoint.com",
             "role": "Contributor"
+        },
+        {
+            "name": "NtlBldrv",
+            "role": "Contributor"
         }
     ],
     "support" : {
@@ -31,11 +35,11 @@
     },
     "scripts": {
         "test": "vendor/bin/phpunit",
-        "lint": "vendor/bin/php-cs-fixer fix"
+        "lint": "vendor/bin/php-cs-fixer fix --ansi --diff --verbose"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.8 || ^6.0",
-        "friendsofphp/php-cs-fixer": "^2.0"
+        "friendsofphp/php-cs-fixer": "^2.0",
+        "phpunit/phpunit": "^4.8 || ^6.0"
     },
     "autoload" : {
         "psr-4" : {
@@ -46,6 +50,9 @@
         "psr-4" : {
             "WsdlToPhp\\WsSecurity\\Tests\\": "tests"
         }
+    },
+    "config": {
+        "sort-packages": true
     }
 }
 
