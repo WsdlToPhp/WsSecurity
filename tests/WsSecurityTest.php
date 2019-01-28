@@ -135,7 +135,8 @@ class WsSecurityTest extends TestCase
             'BAR',
             null,
             true,
-            'env');
+            'env'
+        );
 
         $this->assertInstanceOf('\SoapHeader', $header);
         $this->assertMatches(self::innerTrim('
