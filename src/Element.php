@@ -335,15 +335,11 @@ class Element
     {
         if ($this->hasAttributes()) {
             foreach ($this->getAttributes() as $attributeName => $attributeValue) {
-                if (false === strpos($attributeName, ':')) {
+                $matches = [];
+                if (0 === preg_match(sprintf('/(%s|%s):/', self::NS_WSSU_NAME, self::NS_WSSE_NAME), $attributeName, $matches)) {
                     $element->setAttribute($attributeName, $attributeValue);
                 } else {
-                    list($ns) = explode(':', $attributeName);
-                    if (self::NS_WSSE_NAME === $ns || self::NS_WSSU_NAME === $ns) {
-                        $element->setAttributeNS(self::NS_WSSE_NAME === $ns ? self::NS_WSSE : self::NS_WSSU, $attributeName, $attributeValue);
-                    } else {
-                        $element->setAttribute($attributeName, $attributeValue);
-                    }
+                    $element->setAttributeNS(self::NS_WSSE_NAME === $matches[1] ? self::NS_WSSE : self::NS_WSSU, $attributeName, $attributeValue);
                 }
             }
         }
