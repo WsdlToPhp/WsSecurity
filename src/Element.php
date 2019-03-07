@@ -338,7 +338,7 @@ class Element
                 if (false === strpos($attributeName, ':')) {
                     $element->setAttribute($attributeName, $attributeValue);
                 } else {
-                    list($ns, $name) = explode(':', $attributeName);
+                    list($ns) = explode(':', $attributeName);
                     if (self::NS_WSSE_NAME === $ns || self::NS_WSSU_NAME === $ns) {
                         $element->setAttributeNS(self::NS_WSSE_NAME === $ns ? self::NS_WSSE : self::NS_WSSU, $attributeName, $attributeValue);
                     } else {
