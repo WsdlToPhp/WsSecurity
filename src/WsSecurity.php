@@ -39,21 +39,10 @@ class WsSecurity
             ->setPassword($password, $passwordDigest, $addCreated)
             ->setNonce($addNonce)
             ->setCreated($addCreated)
-            ->setTimestamp($addCreated, $addExpires);
+            ->setTimestamp($addCreated, $addExpires)
+        ;
     }
 
-    /**
-     * @param bool   $mustunderstand
-     * @param string $actor
-     * @param string $envelopeNamespace
-     *
-     * @return WsSecurity
-     */
-    protected function initSecurity($mustunderstand = false, $actor = null, $envelopeNamespace = Security::ENV_NAMESPACE)
-    {
-        $this->security = new Security($mustunderstand, $actor, Security::NS_WSSE, $envelopeNamespace);
-        return $this;
-    }
     /**
      * @return Security
      */
@@ -96,16 +85,32 @@ class WsSecurity
         if ($returnSoapHeader) {
             if (!empty($actor)) {
                 return new \SoapHeader(Element::NS_WSSE, 'Security', new \SoapVar($self->getSecurity()->toSend(), XSD_ANYXML), $mustunderstand, $actor);
-            } else {
-                return new \SoapHeader(Element::NS_WSSE, 'Security', new \SoapVar($self->getSecurity()->toSend(), XSD_ANYXML), $mustunderstand);
             }
-        } else {
-            return new \SoapVar($self->getSecurity()->toSend(), XSD_ANYXML);
+
+            return new \SoapHeader(Element::NS_WSSE, 'Security', new \SoapVar($self->getSecurity()->toSend(), XSD_ANYXML), $mustunderstand);
         }
+
+        return new \SoapVar($self->getSecurity()->toSend(), XSD_ANYXML);
     }
+
+    /**
+     * @param bool   $mustunderstand
+     * @param string $actor
+     * @param string $envelopeNamespace
+     *
+     * @return WsSecurity
+     */
+    protected function initSecurity($mustunderstand = false, $actor = null, $envelopeNamespace = Security::ENV_NAMESPACE)
+    {
+        $this->security = new Security($mustunderstand, $actor, Security::NS_WSSE, $envelopeNamespace);
+
+        return $this;
+    }
+
     /**
      * @param string $username
      * @param string $usernameId
+     *
      * @return WsSecurity
      */
     protected function setUsernameToken($username, $usernameId = null)
@@ -113,21 +118,27 @@ class WsSecurity
         $usernameToken = new UsernameToken($usernameId);
         $usernameToken->setUsername(new Username($username));
         $this->security->setUsernameToken($usernameToken);
+
         return $this;
     }
+
     /**
      * @param string $password
-     * @param bool $passwordDigest
-     * @param int $addCreated
+     * @param bool   $passwordDigest
+     * @param int    $addCreated
+     *
      * @return WsSecurity
      */
     protected function setPassword($password, $passwordDigest = false, $addCreated = 0)
     {
         $this->getUsernameToken()->setPassword(new Password($password, $passwordDigest ? Password::TYPE_PASSWORD_DIGEST : Password::TYPE_PASSWORD_TEXT, is_bool($addCreated) ? 0 : ($addCreated > 0 ? $addCreated : 0)));
+
         return $this;
     }
+
     /**
-     * @param  bool $addNonce
+     * @param bool $addNonce
+     *
      * @return WsSecurity
      */
     protected function setNonce($addNonce)
@@ -138,24 +149,30 @@ class WsSecurity
                 $this->getUsernameToken()->setNonce(new Nonce($nonceValue));
             }
         }
+
         return $this;
     }
+
     /**
      * @param int $addCreated
+     *
      * @return WsSecurity
      */
     protected function setCreated($addCreated)
     {
         $passwordDigest = $this->getPassword()->getTypeValue();
         $timestampValue = $this->getPassword()->getTimestampValue();
-        if (($addCreated || $passwordDigest === Password::TYPE_PASSWORD_DIGEST) && $timestampValue > 0) {
+        if (($addCreated || Password::TYPE_PASSWORD_DIGEST === $passwordDigest) && $timestampValue > 0) {
             $this->getUsernameToken()->setCreated(new Created($timestampValue));
         }
+
         return $this;
     }
+
     /**
      * @param int $addCreated
      * @param int $addExpires
+     *
      * @return WsSecurity
      */
     protected function setTimestamp($addCreated = 0, $addExpires = 0)
@@ -167,8 +184,10 @@ class WsSecurity
             $timestamp->setExpires(new Expires($timestampValue, $addExpires));
             $this->security->setTimestamp($timestamp);
         }
+
         return $this;
     }
+
     /**
      * @return UsernameToken
      */
@@ -176,6 +195,7 @@ class WsSecurity
     {
         return $this->security->getUsernameToken();
     }
+
     /**
      * @return Password
      */
