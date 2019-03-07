@@ -1,9 +1,14 @@
 <?php
+
 namespace WsdlToPhp\WsSecurity\Tests;
 
-use WsdlToPhp\WsSecurity\Tests\TestCase;
 use WsdlToPhp\WsSecurity\WsSecurity;
 
+/**
+ * @covers \WsSecurity creations
+ *
+ * @internal
+ */
 class WsSecurityTest extends TestCase
 {
     public function testCreateWithExpiresIn()
@@ -24,6 +29,7 @@ class WsSecurityTest extends TestCase
             </wssu:Timestamp>
         </wsse:Security>'), $header->data->enc_value);
     }
+
     public function testCreateWithoutExpiresIn()
     {
         $header = WsSecurity::createWsSecuritySoapHeader('foo', 'bar', false, 1459451824);
@@ -38,6 +44,7 @@ class WsSecurityTest extends TestCase
             </wsse:UsernameToken>
         </wsse:Security>'), $header->data->enc_value);
     }
+
     public function testCreateWithMustUnderstand()
     {
         $header = WsSecurity::createWsSecuritySoapHeader('foo', 'bar', false, 1459451824, 0, true, true);
@@ -52,6 +59,7 @@ class WsSecurityTest extends TestCase
             </wsse:UsernameToken>
         </wsse:Security>'), $header->data->enc_value);
     }
+
     public function testCreateWithMustUnderstandAndActor()
     {
         $header = WsSecurity::createWsSecuritySoapHeader('foo', 'bar', false, 1459451824, 0, true, true, 'BAR');
@@ -66,6 +74,7 @@ class WsSecurityTest extends TestCase
             </wsse:UsernameToken>
         </wsse:Security>'), $header->data->enc_value);
     }
+
     public function testCreateSoapVar()
     {
         $header = WsSecurity::createWsSecuritySoapHeader('foo', 'bar', false, 1459451824, 0, false, true, 'BAR');
@@ -80,6 +89,7 @@ class WsSecurityTest extends TestCase
             </wsse:UsernameToken>
         </wsse:Security>'), $header->enc_value);
     }
+
     public function testCreateWithPasswordDigest()
     {
         $header = WsSecurity::createWsSecuritySoapHeader('foo', 'bar', true, 1459451824, 0, false, true, 'BAR');
@@ -94,13 +104,14 @@ class WsSecurityTest extends TestCase
             </wsse:UsernameToken>
         </wsse:Security>'), $header->enc_value);
     }
+
     public function testCreateWithUsernameId()
     {
         $header = WsSecurity::createWsSecuritySoapHeader('foo', 'bar', false, 1459451824, 0, true, true, 'BAR', 'X90I3u8');
         $this->assertInstanceOf('\SoapHeader', $header);
         $this->assertMatches(self::innerTrim('
         <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" SOAP-ENV:mustunderstand="1" SOAP-ENV:actor="BAR">
-            <wsse:UsernameToken wssu:Id="X90I3u8">
+            <wsse:UsernameToken xmlns:wssu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wssu:Id="X90I3u8">
                 <wsse:Username>foo</wsse:Username>
                 <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">bar</wsse:Password>
                 <wssu:Created xmlns:wssu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-03-31T19:17:04Z</wssu:Created>
@@ -108,13 +119,14 @@ class WsSecurityTest extends TestCase
             </wsse:UsernameToken>
         </wsse:Security>'), $header->data->enc_value);
     }
+
     public function testCreateWithoutNonce()
     {
         $header = WsSecurity::createWsSecuritySoapHeader('foo', 'bar', false, 1459451824, 0, true, true, 'BAR', 'X90I3u8', false);
         $this->assertInstanceOf('\SoapHeader', $header);
         $this->assertMatches(self::innerTrim('
         <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" SOAP-ENV:mustunderstand="1" SOAP-ENV:actor="BAR">
-            <wsse:UsernameToken wssu:Id="X90I3u8">
+            <wsse:UsernameToken xmlns:wssu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wssu:Id="X90I3u8">
                 <wsse:Username>foo</wsse:Username>
                 <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">bar</wsse:Password>
                 <wssu:Created xmlns:wssu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-03-31T19:17:04Z</wssu:Created>

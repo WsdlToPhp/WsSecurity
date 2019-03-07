@@ -5,23 +5,28 @@ namespace WsdlToPhp\WsSecurity;
 class Nonce extends Element
 {
     /**
-     * Element name
+     * Element name.
+     *
      * @var string
      */
     const NAME = 'Nonce';
     /**
-     * Element name
+     * Element name.
+     *
      * @var string
      */
     const ATTRIBUTE_ENCODING_TYPE = 'EncodingType';
     /**
-     * Element name
+     * Element name.
+     *
      * @var string
      */
     const NS_ENCODING = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary';
+
     /**
-     * Constructor for Nonce element
-     * @param string $nonce the nonce value
+     * Constructor for Nonce element.
+     *
+     * @param string $nonce     the nonce value
      * @param string $namespace the namespace
      */
     public function __construct($nonce, $namespace = self::NS_WSSE)
@@ -30,9 +35,12 @@ class Nonce extends Element
             self::ATTRIBUTE_ENCODING_TYPE => self::NS_ENCODING,
         ]);
     }
+
     /**
-     * Encode Nonce value
+     * Encode Nonce value.
+     *
      * @param string $nonce
+     *
      * @return string
      */
     public static function encodeNonce($nonce)
