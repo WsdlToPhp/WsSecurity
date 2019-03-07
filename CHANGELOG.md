@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.2.1
+- Fixed issue #7
+
 ## 1.2.0
 - Merged PR #5
 - Fix minor typo
