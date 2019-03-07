@@ -1,4 +1,5 @@
 <?php
+
 namespace WsdlToPhp\WsSecurity\Tests;
 
 use PHPUnit\Framework\TestCase as PHPUnitFrameworkTestCase;
@@ -13,8 +14,9 @@ abstract class TestCase extends PHPUnitFrameworkTestCase
             "\t",
         ], '', $string)));
     }
+
     public static function assertMatches($pattern, $string)
     {
-        return parent::assertTrue(preg_match('/' . str_replace('/', '\/', $pattern) . '/', $string) > 0, $string);
+        return parent::assertRegExp(sprintf('/%s/', str_replace('/', '\/', $pattern)), $string);
     }
 }

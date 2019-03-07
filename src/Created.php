@@ -5,13 +5,16 @@ namespace WsdlToPhp\WsSecurity;
 class Created extends Element
 {
     /**
-     * Element name
+     * Element name.
+     *
      * @var string
      */
     const NAME = 'Created';
+
     /**
-     * Constructor for Created element
-     * @param int $_timestamp the timestamp value
+     * Constructor for Created element.
+     *
+     * @param int    $_timestamp the timestamp value
      * @param string $_namespace the namespace
      */
     public function __construct($_timestamp, $_namespace = self::NS_WSSU)
