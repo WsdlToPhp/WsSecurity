@@ -5,11 +5,9 @@ namespace WsdlToPhp\WsSecurity\Tests;
 use WsdlToPhp\WsSecurity\WsSecurity;
 
 /**
- * @covers \WsdlToPhp\WsSecurity\WsSecurity
- *
  * @internal
  */
-class WsSecurityTest extends TestCase
+final class WsSecurityTest extends TestCase
 {
     public function testCreateWithExpiresIn()
     {
