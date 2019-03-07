@@ -5,7 +5,7 @@ namespace WsdlToPhp\WsSecurity\Tests;
 use WsdlToPhp\WsSecurity\WsSecurity;
 
 /**
- * @covers \WsSecurity creations
+ * @covers \WsdlToPhp\WsSecurity\WsSecurity
  *
  * @internal
  */
