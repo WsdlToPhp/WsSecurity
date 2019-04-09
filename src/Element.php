@@ -249,13 +249,13 @@ class Element
     }
 
     /**
-     * @param mixed $formated
+     * @param mixed $formatted
      *
      * @return int|string
      */
-    public function getTimestampValue($formated = false)
+    public function getTimestampValue($formatted = false)
     {
-        return ($formated && $this->timestampValue > 0) ? gmdate('Y-m-d\TH:i:s\Z', $this->timestampValue) : $this->timestampValue;
+        return ($formatted && $this->timestampValue > 0) ? gmdate('Y-m-d\TH:i:s\Z', $this->timestampValue) : $this->timestampValue;
     }
 
     /**
