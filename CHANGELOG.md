@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.2.2
+- Merged PR #9
+
 ## 1.2.1
 - Fixed issue #7
 
