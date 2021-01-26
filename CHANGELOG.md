@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## x.0.0 - 2021/01/xx
+## 2.0.0 - 2021/01/26
 - use `splitbrain/phpfarm:jessie` as Docker image and fix docker image settings
 - Code requires PHP >= 7.4
 - Code cleaning
