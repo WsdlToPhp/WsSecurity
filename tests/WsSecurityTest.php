@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WsdlToPhp\WsSecurity\Tests;
 
+use SoapHeader;
 use WsdlToPhp\WsSecurity\WsSecurity;
 
 /**
@@ -12,7 +15,7 @@ final class WsSecurityTest extends TestCase
     public function testCreateWithExpiresIn()
     {
         $header = WsSecurity::createWsSecuritySoapHeader('foo', 'bar', false, 1459451824, 600);
-        $this->assertInstanceOf('\SoapHeader', $header);
+        $this->assertInstanceOf(SoapHeader::class, $header);
         $this->assertMatches(self::innerTrim('
         <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
             <wsse:UsernameToken>
@@ -31,7 +34,7 @@ final class WsSecurityTest extends TestCase
     public function testCreateWithoutExpiresIn()
     {
         $header = WsSecurity::createWsSecuritySoapHeader('foo', 'bar', false, 1459451824);
-        $this->assertInstanceOf('\SoapHeader', $header);
+        $this->assertInstanceOf(SoapHeader::class, $header);
         $this->assertMatches(self::innerTrim('
         <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
             <wsse:UsernameToken>
@@ -46,7 +49,7 @@ final class WsSecurityTest extends TestCase
     public function testCreateWithMustUnderstand()
     {
         $header = WsSecurity::createWsSecuritySoapHeader('foo', 'bar', false, 1459451824, 0, true, true);
-        $this->assertInstanceOf('\SoapHeader', $header);
+        $this->assertInstanceOf(SoapHeader::class, $header);
         $this->assertMatches(self::innerTrim('
         <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" SOAP-ENV:mustunderstand="1">
             <wsse:UsernameToken>
@@ -61,7 +64,7 @@ final class WsSecurityTest extends TestCase
     public function testCreateWithMustUnderstandAndActor()
     {
         $header = WsSecurity::createWsSecuritySoapHeader('foo', 'bar', false, 1459451824, 0, true, true, 'BAR');
-        $this->assertInstanceOf('\SoapHeader', $header);
+        $this->assertInstanceOf(SoapHeader::class, $header);
         $this->assertMatches(self::innerTrim('
         <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" SOAP-ENV:mustunderstand="1" SOAP-ENV:actor="BAR">
             <wsse:UsernameToken>
@@ -106,7 +109,7 @@ final class WsSecurityTest extends TestCase
     public function testCreateWithUsernameId()
     {
         $header = WsSecurity::createWsSecuritySoapHeader('foo', 'bar', false, 1459451824, 0, true, true, 'BAR', 'X90I3u8');
-        $this->assertInstanceOf('\SoapHeader', $header);
+        $this->assertInstanceOf(SoapHeader::class, $header);
         $this->assertMatches(self::innerTrim('
         <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" SOAP-ENV:mustunderstand="1" SOAP-ENV:actor="BAR">
             <wsse:UsernameToken xmlns:wssu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wssu:Id="X90I3u8">
@@ -121,7 +124,7 @@ final class WsSecurityTest extends TestCase
     public function testCreateWithoutNonce()
     {
         $header = WsSecurity::createWsSecuritySoapHeader('foo', 'bar', false, 1459451824, 0, true, true, 'BAR', 'X90I3u8', false);
-        $this->assertInstanceOf('\SoapHeader', $header);
+        $this->assertInstanceOf(SoapHeader::class, $header);
         $this->assertMatches(self::innerTrim('
         <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" SOAP-ENV:mustunderstand="1" SOAP-ENV:actor="BAR">
             <wsse:UsernameToken xmlns:wssu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wssu:Id="X90I3u8">
@@ -148,7 +151,7 @@ final class WsSecurityTest extends TestCase
             'env'
         );
 
-        $this->assertInstanceOf('\SoapHeader', $header);
+        $this->assertInstanceOf(SoapHeader::class, $header);
         $this->assertMatches(self::innerTrim('
         <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" env:mustunderstand="1" env:actor="BAR">
             <wsse:UsernameToken>

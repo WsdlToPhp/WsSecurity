@@ -1,55 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WsdlToPhp\WsSecurity;
+
+use DOMElement;
 
 class UsernameToken extends Element
 {
-    /**
-     * Element name.
-     *
-     * @var string
-     */
     const NAME = 'UsernameToken';
-    /**
-     * Attribute id name.
-     *
-     * @var string
-     */
-    const ATTRIBUTE_ID = 'Id';
-    /**
-     * Username element.
-     *
-     * @var Username
-     */
-    protected $username;
-    /**
-     * Password element.
-     *
-     * @var Password
-     */
-    protected $password;
-    /**
-     * Created element.
-     *
-     * @var Created
-     */
-    protected $created;
-    /**
-     * Nonce element.
-     *
-     * @var Nonce
-     */
-    protected $nonce;
 
-    /**
-     * Constructor for UsernameToken element.
-     *
-     * @see Element::__construct()
-     *
-     * @param string $id
-     * @param string $namespace the namespace
-     */
-    public function __construct($id = null, $namespace = self::NS_WSSE)
+    const ATTRIBUTE_ID = 'Id';
+
+    protected ?Username $username = null;
+
+    protected ?Password $password = null;
+
+    protected ?Created $created = null;
+
+    protected ?Nonce $nonce = null;
+
+    public function __construct(?string $id = null, string $namespace = self::NS_WSSE)
     {
         parent::__construct(self::NAME, $namespace, null, empty($id) ? [] : [
             sprintf('%s:%s', parent::NS_WSSU_NAME, self::ATTRIBUTE_ID) => $id,
@@ -61,9 +32,9 @@ class UsernameToken extends Element
      *
      * @param bool $asDomElement returns elements as a DOMElement or as a string
      *
-     * @return string
+     * @return DOMElement|string
      */
-    protected function __toSend($asDomElement = false)
+    protected function __toSend(bool $asDomElement = false)
     {
         $this->setValue([
             $this->getUsername(),
@@ -75,80 +46,48 @@ class UsernameToken extends Element
         return parent::__toSend($asDomElement);
     }
 
-    /**
-     * @return Username
-     */
-    public function getUsername()
+    public function getUsername(): ?Username
     {
         return $this->username;
     }
 
-    /**
-     * @param Username $username
-     *
-     * @return UsernameToken
-     */
-    public function setUsername(Username $username)
+    public function setUsername(Username $username): self
     {
         $this->username = $username;
 
         return $this;
     }
 
-    /**
-     * @return Password
-     */
-    public function getPassword()
+    public function getPassword(): ?Password
     {
         return $this->password;
     }
 
-    /**
-     * @param Password $password
-     *
-     * @return UsernameToken
-     */
-    public function setPassword($password)
+    public function setPassword(Password $password): self
     {
         $this->password = $password;
 
         return $this;
     }
 
-    /**
-     * @return Created
-     */
-    public function getCreated()
+    public function getCreated(): ?Created
     {
         return $this->created;
     }
 
-    /**
-     * @param Created $created
-     *
-     * @return UsernameToken
-     */
-    public function setCreated($created)
+    public function setCreated(Created $created): self
     {
         $this->created = $created;
 
         return $this;
     }
 
-    /**
-     * @return Nonce
-     */
-    public function getNonce()
+    public function getNonce(): ?Nonce
     {
         return $this->nonce;
     }
 
-    /**
-     * @param Nonce $nonce
-     *
-     * @return UsernameToken
-     */
-    public function setNonce($nonce)
+    public function setNonce(Nonce $nonce): self
     {
         $this->nonce = $nonce;
 

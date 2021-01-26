@@ -1,6 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WsdlToPhp\WsSecurity;
+
+use DOMDocument;
+use DOMElement;
 
 /**
  * Base class to represent any element that must be included for a WS-Security header.
@@ -10,36 +15,16 @@ namespace WsdlToPhp\WsSecurity;
  */
 class Element
 {
-    /**
-     * Namespace for WSSE elements.
-     *
-     * @var string
-     */
     const NS_WSSE = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd';
-    /**
-     * Namespace name for WSSE elements.
-     *
-     * @var string
-     */
+
     const NS_WSSE_NAME = 'wsse';
-    /**
-     * Namespace for WSSU elements.
-     *
-     * @var string
-     */
+
     const NS_WSSU = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd';
-    /**
-     * Namespace name for WSSU elements.
-     *
-     * @var string
-     */
+
     const NS_WSSU_NAME = 'wssu';
-    /**
-     * Name of the element used as the WS-Security tag.
-     *
-     * @var string
-     */
-    protected $name = '';
+
+    protected string $name = '';
+
     /**
      * Value of the element.
      * It can either be a string value or a Element object.
@@ -47,53 +32,49 @@ class Element
      * @var Element|string
      */
     protected $value = '';
+
     /**
      * Array of attributes that must contains the element.
      *
      * @var array
      */
-    protected $attributes = [];
+    protected array $attributes = [];
+
     /**
      * The namespace the element belongs to.
      *
      * @var string
      */
-    protected $namespace = '';
+    protected string $namespace = '';
+
     /**
      * Nonce used to generate digest password.
      *
      * @var string
      */
-    protected $nonceValue;
+    protected string $nonceValue;
+
     /**
      * Timestamp used to generate digest password.
      *
      * @var int
      */
-    protected $timestampValue;
-    /**
-     * Current \DOMDocument used to generate XML content.
-     *
-     * @var \DOMDocument
-     */
-    protected static $dom = null;
+    protected int $timestampValue;
 
     /**
-     * Generic constructor.
+     * Current DOMDocument used to generate XML content.
      *
-     * @param string $name
-     * @param string $namespace
-     * @param mixed  $value
-     * @param array  $attributes
+     * @var DOMDocument|null
      */
-    public function __construct($name, $namespace, $value = null, array $attributes = [])
+    protected static ?DOMDocument $dom = null;
+
+    public function __construct(string $name, string $namespace, $value = null, array $attributes = [])
     {
         $this
             ->setName($name)
             ->setNamespace($namespace)
             ->setValue($value)
-            ->setAttributes($attributes)
-        ;
+            ->setAttributes($attributes);
     }
 
     /**
@@ -101,23 +82,19 @@ class Element
      *
      * @param bool $asDomElement returns elements as a \DOMElement or as a string
      *
-     * @return \DOMElement|string
+     * @return DOMElement|string
      */
-    protected function __toSend($asDomElement = false)
+    protected function __toSend(bool $asDomElement = false)
     {
-        /**
-         * Create element tag.
-         */
+        // Create element tag.
         $element = self::getDom()->createElement($this->getNamespacedName());
         $element->setAttributeNS('http://www.w3.org/2000/xmlns/', sprintf('xmlns:%s', $this->getNamespacePrefix()), $this->getNamespace());
-        /*
-         * Define element value
-         * Add attributes if there are any
-         */
+
+        // Define element value, add attributes if there are any
         $this
             ->appendValueToElementToSend($this->getValue(), $element)
-            ->appendAttributesToElementToSend($element)
-        ;
+            ->appendAttributesToElementToSend($element);
+
         // Returns element content
         if ($asDomElement) {
             return $element;
@@ -126,81 +103,49 @@ class Element
         return self::getDom()->saveXML($element);
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return Element
-     */
-    public function setName($name)
+
+    public function setName($name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function getAttributes()
+    public function getAttributes(): array
     {
         return $this->attributes;
     }
 
-    /**
-     * @param array $attributes
-     *
-     * @return Element
-     */
-    public function setAttributes(array $attributes)
+    public function setAttributes(array $attributes): self
     {
         $this->attributes = $attributes;
 
         return $this;
     }
 
-    /**
-     * @param string $name
-     * @param mixed  $value
-     *
-     * @return Element
-     */
-    public function setAttribute($name, $value)
+    public function setAttribute(string $name, $value): self
     {
         $this->attributes[$name] = $value;
 
         return $this;
     }
 
-    /**
-     * @return bool true|false
-     */
-    public function hasAttributes()
+    public function hasAttributes(): bool
     {
-        return count($this->attributes) > 0;
+        return 0 < count($this->attributes);
     }
 
-    /**
-     * @return string
-     */
-    public function getNamespace()
+    public function getNamespace(): string
     {
         return $this->namespace;
     }
 
-    /**
-     * @param string $namespace
-     *
-     * @return Element
-     */
-    public function setNamespace($namespace)
+    public function setNamespace(string $namespace): self
     {
         $this->namespace = $namespace;
 
@@ -216,32 +161,23 @@ class Element
     }
 
     /**
-     * @param Element|string
      * @param mixed $value
      *
      * @return Element
      */
-    public function setValue($value)
+    public function setValue($value): self
     {
         $this->value = $value;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getNonceValue()
+    public function getNonceValue(): string
     {
         return $this->nonceValue;
     }
 
-    /**
-     * @param string $nonceValue
-     *
-     * @return Element
-     */
-    public function setNonceValue($nonceValue)
+    public function setNonceValue(string $nonceValue): self
     {
         $this->nonceValue = $nonceValue;
 
@@ -249,21 +185,16 @@ class Element
     }
 
     /**
-     * @param mixed $formatted
+     * @param bool $formatted
      *
      * @return int|string
      */
-    public function getTimestampValue($formatted = false)
+    public function getTimestampValue(bool $formatted = false)
     {
         return ($formatted && $this->timestampValue > 0) ? gmdate('Y-m-d\TH:i:s\Z', $this->timestampValue) : $this->timestampValue;
     }
 
-    /**
-     * @param int $timestampValue
-     *
-     * @return Element
-     */
-    public function setTimestampValue($timestampValue)
+    public function setTimestampValue(int $timestampValue): self
     {
         $this->timestampValue = $timestampValue;
 
@@ -275,9 +206,9 @@ class Element
      *
      * @return string
      */
-    public function toSend()
+    public function toSend(): string
     {
-        self::setDom(new \DOMDocument('1.0', 'UTF-8'));
+        self::setDom(new DOMDocument('1.0', 'UTF-8'));
 
         return $this->__toSend();
     }
@@ -286,11 +217,11 @@ class Element
      * Handle adding value to element according to the value type.
      *
      * @param mixed       $value
-     * @param \DOMElement $element
+     * @param DOMElement $element
      *
      * @return Element
      */
-    protected function appendValueToElementToSend($value, \DOMElement $element)
+    protected function appendValueToElementToSend($value, DOMElement $element): self
     {
         if ($value instanceof Element) {
             $this->appendElementToElementToSend($value, $element);
@@ -303,44 +234,33 @@ class Element
         return $this;
     }
 
-    /**
-     * @param Element     $element
-     * @param \DOMElement $element
-     */
-    protected function appendElementToElementToSend(Element $value, \DOMElement $element)
+    protected function appendElementToElementToSend(Element $value, DOMElement $element): void
     {
         $toSend = $value->__toSend(true);
-        if ($toSend instanceof \DOMElement) {
+        if ($toSend instanceof DOMElement) {
             $element->appendChild($toSend);
         }
     }
 
-    /**
-     * @param array       $values
-     * @param \DOMElement $element
-     */
-    protected function appendValuesToElementToSend(array $values, \DOMElement $element)
+    protected function appendValuesToElementToSend(array $values, DOMElement $element): void
     {
         foreach ($values as $value) {
             $this->appendValueToElementToSend($value, $element);
         }
     }
 
-    /**
-     * @param \DOMElement $element
-     *
-     * @return Element
-     */
-    protected function appendAttributesToElementToSend(\DOMElement $element)
+    protected function appendAttributesToElementToSend(DOMElement $element): self
     {
-        if ($this->hasAttributes()) {
-            foreach ($this->getAttributes() as $attributeName => $attributeValue) {
-                $matches = [];
-                if (0 === preg_match(sprintf('/(%s|%s):/', self::NS_WSSU_NAME, self::NS_WSSE_NAME), $attributeName, $matches)) {
-                    $element->setAttribute($attributeName, $attributeValue);
-                } else {
-                    $element->setAttributeNS(self::NS_WSSE_NAME === $matches[1] ? self::NS_WSSE : self::NS_WSSU, $attributeName, $attributeValue);
-                }
+        if (!$this->hasAttributes()) {
+            return $this;
+        }
+
+        foreach ($this->getAttributes() as $attributeName => $attributeValue) {
+            $matches = [];
+            if (0 === preg_match(sprintf('/(%s|%s):/', self::NS_WSSU_NAME, self::NS_WSSE_NAME), $attributeName, $matches)) {
+                $element->setAttribute($attributeName, (string) $attributeValue);
+            } else {
+                $element->setAttributeNS(self::NS_WSSE_NAME === $matches[1] ? self::NS_WSSE : self::NS_WSSU, $attributeName, $attributeValue);
             }
         }
 
@@ -352,7 +272,7 @@ class Element
      *
      * @return string
      */
-    protected function getNamespacedName()
+    protected function getNamespacedName(): string
     {
         return sprintf('%s:%s', $this->getNamespacePrefix(), $this->getName());
     }
@@ -360,7 +280,7 @@ class Element
     /**
      * @return string
      */
-    private function getNamespacePrefix()
+    private function getNamespacePrefix(): string
     {
         $namespacePrefix = '';
         switch ($this->getNamespace()) {
@@ -375,20 +295,12 @@ class Element
         return $namespacePrefix;
     }
 
-    /**
-     * @return \DOMDocument
-     */
-    private static function getDom()
+    private static function getDom(): ?DOMDocument
     {
         return self::$dom;
     }
 
-    /**
-     * @param \DOMDocument $dom
-     *
-     * @return \DOMDocument
-     */
-    private static function setDom(\DOMDocument $dom)
+    private static function setDom(DOMDocument $dom): void
     {
         self::$dom = $dom;
     }

@@ -1,40 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WsdlToPhp\WsSecurity;
+
+use SoapHeader;
+use SoapVar;
 
 class WsSecurity
 {
-    /**
-     * @var Security
-     */
-    protected $security;
+    protected Security $security;
 
-    /**
-     * @param string $username
-     * @param string $password
-     * @param bool   $passwordDigest
-     * @param int    $addCreated
-     * @param int    $addExpires
-     * @param bool   $mustunderstand
-     * @param string $actor
-     * @param string $usernameId
-     * @param bool   $addNonce
-     * @param string $envelopeNamespace
-     */
     protected function __construct(
-        $username,
-        $password,
-        $passwordDigest = false,
-        $addCreated = 0,
-        $addExpires = 0,
-        $mustunderstand = false,
-        $actor = null,
-        $usernameId = null,
-        $addNonce = true,
-        $envelopeNamespace = Security::ENV_NAMESPACE
+        string $username,
+        string $password,
+        bool $passwordDigest = false,
+        int $addCreated = 0,
+        int $addExpires = 0,
+        bool $mustUnderstand = false,
+        ?string $actor = null,
+        ?String $usernameId = null,
+        bool $addNonce = true,
+        string $envelopeNamespace = Security::ENV_NAMESPACE
     ) {
         $this
-            ->initSecurity($mustunderstand, $actor, $envelopeNamespace)
+            ->initSecurity($mustUnderstand, $actor, $envelopeNamespace)
             ->setUsernameToken($username, $usernameId)
             ->setPassword($password, $passwordDigest, $addCreated)
             ->setNonce($addNonce)
@@ -43,77 +33,44 @@ class WsSecurity
         ;
     }
 
-    /**
-     * @return Security
-     */
-    public function getSecurity()
+    public function getSecurity(): ?Security
     {
         return $this->security;
     }
 
-    /**
-     * Create the SoapHeader object to send as SoapHeader in the SOAP request.
-     *
-     * @param string $username
-     * @param string $password
-     * @param bool   $passwordDigest
-     * @param int    $addCreated
-     * @param int    $addExpires
-     * @param bool   $returnSoapHeader
-     * @param bool   $mustunderstand
-     * @param string $actor
-     * @param string $usernameId
-     * @param bool   $addNonce
-     * @param string $envelopeNamespace
-     *
-     * @return \SoapHeader|\SoapVar
-     */
     public static function createWsSecuritySoapHeader(
-        $username,
-        $password,
-        $passwordDigest = false,
-        $addCreated = 0,
-        $addExpires = 0,
-        $returnSoapHeader = true,
-        $mustunderstand = false,
-        $actor = null,
-        $usernameId = null,
-        $addNonce = true,
-        $envelopeNamespace = Security::ENV_NAMESPACE
+        string $username,
+        string $password,
+        bool $passwordDigest = false,
+        int $addCreated = 0,
+        int $addExpires = 0,
+        bool $returnSoapHeader = true,
+        bool $mustUnderstand = false,
+        ?String $actor = null,
+        ?string $usernameId = null,
+        bool $addNonce = true,
+        string $envelopeNamespace = Security::ENV_NAMESPACE
     ) {
-        $self = new WsSecurity($username, $password, $passwordDigest, $addCreated, $addExpires, $mustunderstand, $actor, $usernameId, $addNonce, $envelopeNamespace);
+        $self = new WsSecurity($username, $password, $passwordDigest, $addCreated, $addExpires, $mustUnderstand, $actor, $usernameId, $addNonce, $envelopeNamespace);
         if ($returnSoapHeader) {
             if (!empty($actor)) {
-                return new \SoapHeader(Element::NS_WSSE, 'Security', new \SoapVar($self->getSecurity()->toSend(), XSD_ANYXML), $mustunderstand, $actor);
+                return new SoapHeader(Element::NS_WSSE, Security::NAME, new SoapVar($self->getSecurity()->toSend(), XSD_ANYXML), $mustUnderstand, $actor);
             }
 
-            return new \SoapHeader(Element::NS_WSSE, 'Security', new \SoapVar($self->getSecurity()->toSend(), XSD_ANYXML), $mustunderstand);
+            return new SoapHeader(Element::NS_WSSE, Security::NAME, new SoapVar($self->getSecurity()->toSend(), XSD_ANYXML), $mustUnderstand);
         }
 
-        return new \SoapVar($self->getSecurity()->toSend(), XSD_ANYXML);
+        return new SoapVar($self->getSecurity()->toSend(), XSD_ANYXML);
     }
 
-    /**
-     * @param bool   $mustunderstand
-     * @param string $actor
-     * @param string $envelopeNamespace
-     *
-     * @return WsSecurity
-     */
-    protected function initSecurity($mustunderstand = false, $actor = null, $envelopeNamespace = Security::ENV_NAMESPACE)
+    protected function initSecurity(bool $mustUnderstand = false, ?string $actor = null, string $envelopeNamespace = Security::ENV_NAMESPACE): self
     {
-        $this->security = new Security($mustunderstand, $actor, Security::NS_WSSE, $envelopeNamespace);
+        $this->security = new Security($mustUnderstand, $actor, Security::NS_WSSE, $envelopeNamespace);
 
         return $this;
     }
 
-    /**
-     * @param string $username
-     * @param string $usernameId
-     *
-     * @return WsSecurity
-     */
-    protected function setUsernameToken($username, $usernameId = null)
+    protected function setUsernameToken(string $username, ?string $usernameId = null): self
     {
         $usernameToken = new UsernameToken($usernameId);
         $usernameToken->setUsername(new Username($username));
@@ -122,26 +79,14 @@ class WsSecurity
         return $this;
     }
 
-    /**
-     * @param string $password
-     * @param bool   $passwordDigest
-     * @param int    $addCreated
-     *
-     * @return WsSecurity
-     */
-    protected function setPassword($password, $passwordDigest = false, $addCreated = 0)
+    protected function setPassword(string $password, bool $passwordDigest = false, int $addCreated = 0): self
     {
         $this->getUsernameToken()->setPassword(new Password($password, $passwordDigest ? Password::TYPE_PASSWORD_DIGEST : Password::TYPE_PASSWORD_TEXT, is_bool($addCreated) ? 0 : ($addCreated > 0 ? $addCreated : 0)));
 
         return $this;
     }
 
-    /**
-     * @param bool $addNonce
-     *
-     * @return WsSecurity
-     */
-    protected function setNonce($addNonce)
+    protected function setNonce(bool $addNonce): self
     {
         if ($addNonce) {
             $nonceValue = $this->getPassword()->getNonceValue();
@@ -153,12 +98,7 @@ class WsSecurity
         return $this;
     }
 
-    /**
-     * @param int $addCreated
-     *
-     * @return WsSecurity
-     */
-    protected function setCreated($addCreated)
+    protected function setCreated(int $addCreated): self
     {
         $passwordDigest = $this->getPassword()->getTypeValue();
         $timestampValue = $this->getPassword()->getTimestampValue();
@@ -169,13 +109,7 @@ class WsSecurity
         return $this;
     }
 
-    /**
-     * @param int $addCreated
-     * @param int $addExpires
-     *
-     * @return WsSecurity
-     */
-    protected function setTimestamp($addCreated = 0, $addExpires = 0)
+    protected function setTimestamp(int $addCreated = 0, int $addExpires = 0): self
     {
         $timestampValue = $this->getPassword()->getTimestampValue();
         if ($addCreated && $addExpires && $timestampValue) {
@@ -188,18 +122,12 @@ class WsSecurity
         return $this;
     }
 
-    /**
-     * @return UsernameToken
-     */
-    protected function getUsernameToken()
+    protected function getUsernameToken(): ?UsernameToken
     {
         return $this->security->getUsernameToken();
     }
 
-    /**
-     * @return Password
-     */
-    protected function getPassword()
+    protected function getPassword(): ?Password
     {
         return $this->getUsernameToken()->getPassword();
     }

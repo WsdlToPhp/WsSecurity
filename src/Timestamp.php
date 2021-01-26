@@ -1,34 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WsdlToPhp\WsSecurity;
+
+use DOMElement;
 
 class Timestamp extends Element
 {
-    /**
-     * Element name.
-     *
-     * @var string
-     */
     const NAME = 'Timestamp';
-    /**
-     * Created element.
-     *
-     * @var Created
-     */
-    protected $created;
-    /**
-     * Created element.
-     *
-     * @var Expires
-     */
-    protected $expires;
 
-    /**
-     * Constructor for Timestamp element.
-     *
-     * @param string $namespace the namespace
-     */
-    public function __construct($namespace = self::NS_WSSU)
+    protected ?Created $created;
+
+    protected ?Expires $expires;
+
+    public function __construct(string $namespace = self::NS_WSSU)
     {
         parent::__construct(self::NAME, $namespace);
     }
@@ -38,9 +24,9 @@ class Timestamp extends Element
      *
      * @param bool $asDomElement returns elements as a DOMElement or as a string
      *
-     * @return string
+     * @return DOMElement|string
      */
-    protected function __toSend($asDomElement = false)
+    protected function __toSend(bool $asDomElement = false)
     {
         $this->setValue([
             $this->getCreated(),
@@ -50,40 +36,24 @@ class Timestamp extends Element
         return parent::__toSend($asDomElement);
     }
 
-    /**
-     * @return Created
-     */
-    public function getCreated()
+    public function getCreated(): ?Created
     {
         return $this->created;
     }
 
-    /**
-     * @param Created $created
-     *
-     * @return Timestamp
-     */
-    public function setCreated(Created $created)
+    public function setCreated(Created $created): self
     {
         $this->created = $created;
 
         return $this;
     }
 
-    /**
-     * @return Expires
-     */
-    public function getExpires()
+    public function getExpires(): ?Expires
     {
         return $this->expires;
     }
 
-    /**
-     * @param Expires $expires
-     *
-     * @return Expires
-     */
-    public function setExpires(Expires $expires)
+    public function setExpires(Expires $expires): self
     {
         $this->expires = $expires;
 

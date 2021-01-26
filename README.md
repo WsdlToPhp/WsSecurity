@@ -46,12 +46,27 @@ The `WsSecurity::createWsSecuritySoapHeader` parameters are defined in this orde
 - **$usernameId**: the id to attach to the UsernameToken element, optional
 - **$addNonce**: _true_ by default, if true, it adds the nonce element to the header, if false it does not add the nonce element to the header 
 
-## Unit tests
-You can run the unit tests with the following command at the root directory of this project:
-```
-$ composer test
+## Testing using [Docker](https://www.docker.com/)
+Thanks to the [Docker image](https://hub.docker.com/r/splitbrain/phpfarm) of [phpfarm](https://github.com/fpoirotte/phpfarm), tests can be run locally under *any* PHP version using the cli:
+- php-7.4
+
+First of all, you need to create your container which you can do using [docker-compose](https://docs.docker.com/compose/) by running the below command line from the root directory of the project:
+```bash
+$ docker-compose up -d --build
 ```
 
-## Feedback
-Any feedback is appreciated at contact@wsdltophp.com or by creating an issue on this project.
+You then have a container named `ws_security` in which you can run `composer` commands and `php cli` commands such as:
+```bash
+# install deps in container (using update ensure it does use the composer.lock file if there is any)
+$ docker exec -it ws_security php-7.4 /usr/bin/composer update
+# run tests in container
+$ docker exec -it ws_security php-7.4 -dmemory_limit=-1 vendor/bin/phpunit
+```
 
+## FAQ
+
+If you have a question, feel free to [create an issue](https://github.com/WsdlToPhp/WsSecurity/issues/new).
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
