@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WsdlToPhp\WsSecurity\Tests;
 
 use PHPUnit\Framework\TestCase as PHPUnitFrameworkTestCase;
 
 abstract class TestCase extends PHPUnitFrameworkTestCase
 {
-    public static function innerTrim($string)
+    public static function innerTrim($string): string
     {
         return trim(preg_replace('/>\s*</', '><', str_replace([
             "\r",
@@ -17,6 +19,6 @@ abstract class TestCase extends PHPUnitFrameworkTestCase
 
     public static function assertMatches($pattern, $string)
     {
-        return parent::assertRegExp(sprintf('/%s/', str_replace('/', '\/', $pattern)), $string);
+        parent::assertMatchesRegularExpression(sprintf('/%s/', str_replace('/', '\/', $pattern)), $string);
     }
 }
