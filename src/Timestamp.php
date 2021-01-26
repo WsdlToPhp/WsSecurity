@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace WsdlToPhp\WsSecurity;
 
+use DOMElement;
+
 class Timestamp extends Element
 {
     const NAME = 'Timestamp';

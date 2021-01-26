@@ -9,7 +9,7 @@ use SoapVar;
 
 class WsSecurity
 {
-    protected ?Security $security;
+    protected Security $security;
 
     protected function __construct(
         string $username,
