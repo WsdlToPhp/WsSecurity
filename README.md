@@ -4,7 +4,7 @@
 
 [![License](https://poser.pugx.org/wsdltophp/wssecurity/license)](https://packagist.org/packages/wsdltophp/wssecurity)
 [![Latest Stable Version](https://poser.pugx.org/wsdltophp/wssecurity/version.png)](https://packagist.org/packages/wsdltophp/wssecurity)
-[![Build Status](https://api.travis-ci.org/WsdlToPhp/WsSecurity.svg)](https://travis-ci.org/WsdlToPhp/WsSecurity)
+[![Build Status](https://travis-ci.com/WsdlToPhp/WsSecurity.svg)](https://travis-ci.com/github/WsdlToPhp/WsSecurity)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/WsdlToPhp/WsSecurity/badges/quality-score.png)](https://scrutinizer-ci.com/g/WsdlToPhp/WsSecurity/)
 [![Code Coverage](https://scrutinizer-ci.com/g/WsdlToPhp/WsSecurity/badges/coverage.png)](https://scrutinizer-ci.com/g/WsdlToPhp/WsSecurity/)
 [![Total Downloads](https://poser.pugx.org/wsdltophp/wssecurity/downloads)](https://packagist.org/packages/wsdltophp/wssecurity)
