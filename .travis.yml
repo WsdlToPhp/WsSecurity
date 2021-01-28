@@ -24,7 +24,7 @@ install:
     - composer install
 
 script:
-    - php -dmemory_limit=-1 -dxdebug.mode=coverage ./vendor/phpunit/phpunit/phpunit --coverage-text --coverage-clover=coverage.clover
+    - php -dmemory_limit=-1 -dxdebug.mode=coverage ./vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
 
 after_script:
     - wget https://scrutinizer-ci.com/ocular.phar
