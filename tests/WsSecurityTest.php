@@ -9,6 +9,7 @@ use WsdlToPhp\WsSecurity\WsSecurity;
 
 /**
  * @internal
+ * @coversDefaultClass
  */
 final class WsSecurityTest extends TestCase
 {

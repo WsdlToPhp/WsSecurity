@@ -25,11 +25,11 @@ class Security extends Element
         parent::__construct(self::NAME, $namespace);
 
         if (true === $mustUnderstand) {
-            $this->setAttribute($envelopeNamespace . self::ATTRIBUTE_MUST_UNDERSTAND, $mustUnderstand);
+            $this->setAttribute($envelopeNamespace.self::ATTRIBUTE_MUST_UNDERSTAND, $mustUnderstand);
         }
 
         if (!empty($actor)) {
-            $this->setAttribute($envelopeNamespace . self::ATTRIBUTE_ACTOR, $actor);
+            $this->setAttribute($envelopeNamespace.self::ATTRIBUTE_ACTOR, $actor);
         }
     }
 

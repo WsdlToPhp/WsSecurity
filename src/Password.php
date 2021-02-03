@@ -21,7 +21,8 @@ class Password extends Element
         $this
             ->setTypeValue($typeValue)
             ->setTimestampValue($timestampValue ? $timestampValue : time())
-            ->setNonceValue((string) mt_rand());
+            ->setNonceValue((string) mt_rand())
+        ;
 
         parent::__construct(self::NAME, $namespace, $this->convertPassword($password), [
             self::ATTRIBUTE_TYPE => $typeValue,
@@ -39,16 +40,13 @@ class Password extends Element
 
     /**
      * When generating the password digest, we define values (nonce and timestamp) that can be used in other place.
-     *
-     * @param string $password
-     * @return string
      */
     public function digestPassword(string $password): string
     {
         $packedNonce = pack('H*', $this->getNonceValue());
         $packedTimestamp = pack('a*', $this->getTimestampValue(true));
         $packedPassword = pack('a*', $password);
-        $hash = sha1($packedNonce . $packedTimestamp . $packedPassword);
+        $hash = sha1($packedNonce.$packedTimestamp.$packedPassword);
         $packedHash = pack('H*', $hash);
 
         return base64_encode($packedHash);
