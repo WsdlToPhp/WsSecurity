@@ -102,7 +102,7 @@ class WsSecurity
     {
         $passwordDigest = $this->getPassword()->getTypeValue();
         $timestampValue = $this->getPassword()->getTimestampValue();
-        if (($addCreated || Password::TYPE_PASSWORD_DIGEST === $passwordDigest) && $timestampValue > 0) {
+        if (($addCreated || Password::TYPE_PASSWORD_DIGEST === $passwordDigest) && 0 < $timestampValue) {
             $this->getUsernameToken()->setCreated(new Created($timestampValue));
         }
 
