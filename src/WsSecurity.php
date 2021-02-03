@@ -19,7 +19,7 @@ class WsSecurity
         int $addExpires = 0,
         bool $mustUnderstand = false,
         ?string $actor = null,
-        ?String $usernameId = null,
+        ?string $usernameId = null,
         bool $addNonce = true,
         string $envelopeNamespace = Security::ENV_NAMESPACE
     ) {
@@ -46,7 +46,7 @@ class WsSecurity
         int $addExpires = 0,
         bool $returnSoapHeader = true,
         bool $mustUnderstand = false,
-        ?String $actor = null,
+        ?string $actor = null,
         ?string $usernameId = null,
         bool $addNonce = true,
         string $envelopeNamespace = Security::ENV_NAMESPACE

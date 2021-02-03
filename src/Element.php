@@ -35,36 +35,26 @@ class Element
 
     /**
      * Array of attributes that must contains the element.
-     *
-     * @var array
      */
     protected array $attributes = [];
 
     /**
      * The namespace the element belongs to.
-     *
-     * @var string
      */
     protected string $namespace = '';
 
     /**
      * Nonce used to generate digest password.
-     *
-     * @var string
      */
     protected string $nonceValue;
 
     /**
      * Timestamp used to generate digest password.
-     *
-     * @var int
      */
     protected int $timestampValue;
 
     /**
      * Current DOMDocument used to generate XML content.
-     *
-     * @var DOMDocument|null
      */
     protected static ?DOMDocument $dom = null;
 
@@ -74,7 +64,8 @@ class Element
             ->setName($name)
             ->setNamespace($namespace)
             ->setValue($value)
-            ->setAttributes($attributes);
+            ->setAttributes($attributes)
+        ;
     }
 
     /**
@@ -93,7 +84,8 @@ class Element
         // Define element value, add attributes if there are any
         $this
             ->appendValueToElementToSend($this->getValue(), $element)
-            ->appendAttributesToElementToSend($element);
+            ->appendAttributesToElementToSend($element)
+        ;
 
         // Returns element content
         if ($asDomElement) {
@@ -107,7 +99,6 @@ class Element
     {
         return $this->name;
     }
-
 
     public function setName($name): self
     {
@@ -185,8 +176,6 @@ class Element
     }
 
     /**
-     * @param bool $formatted
-     *
      * @return int|string
      */
     public function getTimestampValue(bool $formatted = false)
@@ -203,8 +192,6 @@ class Element
 
     /**
      * Returns the element to send as WS-Security header.
-     *
-     * @return string
      */
     public function toSend(): string
     {
@@ -216,8 +203,7 @@ class Element
     /**
      * Handle adding value to element according to the value type.
      *
-     * @param mixed       $value
-     * @param DOMElement $element
+     * @param mixed $value
      *
      * @return Element
      */
@@ -269,26 +255,25 @@ class Element
 
     /**
      * Returns the name with its namespace.
-     *
-     * @return string
      */
     protected function getNamespacedName(): string
     {
         return sprintf('%s:%s', $this->getNamespacePrefix(), $this->getName());
     }
 
-    /**
-     * @return string
-     */
     private function getNamespacePrefix(): string
     {
         $namespacePrefix = '';
+
         switch ($this->getNamespace()) {
             case self::NS_WSSE:
                 $namespacePrefix = self::NS_WSSE_NAME;
+
                 break;
+
             case self::NS_WSSU:
                 $namespacePrefix = self::NS_WSSU_NAME;
+
                 break;
         }
 
