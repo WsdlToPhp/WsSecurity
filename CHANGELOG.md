@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.0.4 - 2022/03/24
+- Upgrade PHP CS Fixer
+
 ## 2.0.3 - 2022/03/24
 - Update badges
 - Remove Travis CI settings
