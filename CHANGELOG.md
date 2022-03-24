@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.0.3 - 2022/03/24
+- Update badges
+- Remove Travis CI settings
+- Add PHPStan analyze
+- Minor source code improvements
+
 ## 2.0.2 - 2021/02/03
 - Review .php_cs settings, apply PHP CS Fixer
 - Fix minor typo

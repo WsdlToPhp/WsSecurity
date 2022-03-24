@@ -4,12 +4,12 @@
 
 [![License](https://poser.pugx.org/wsdltophp/wssecurity/license)](https://packagist.org/packages/wsdltophp/wssecurity)
 [![Latest Stable Version](https://poser.pugx.org/wsdltophp/wssecurity/version.png)](https://packagist.org/packages/wsdltophp/wssecurity)
-[![Build Status](https://travis-ci.com/WsdlToPhp/WsSecurity.svg)](https://travis-ci.com/github/WsdlToPhp/WsSecurity)
+[![TeamCity build status](https://teamcity.mikael-delsol.fr/app/rest/builds/buildType:id:WsSecurity_Build/statusIcon.svg)](https://github.com/WsdlToPhp/WsSecurity)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/WsdlToPhp/WsSecurity/badges/quality-score.png)](https://scrutinizer-ci.com/g/WsdlToPhp/WsSecurity/)
 [![Code Coverage](https://scrutinizer-ci.com/g/WsdlToPhp/WsSecurity/badges/coverage.png)](https://scrutinizer-ci.com/g/WsdlToPhp/WsSecurity/)
 [![Total Downloads](https://poser.pugx.org/wsdltophp/wssecurity/downloads)](https://packagist.org/packages/wsdltophp/wssecurity)
 [![StyleCI](https://styleci.io/repos/43811404/shield)](https://styleci.io/repos/43811404)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/1cc28292-0f49-47eb-b2ca-4bdd6c0223f1/mini.png)](https://insight.sensiolabs.com/projects/1cc28292-0f49-47eb-b2ca-4bdd6c0223f1)
+[![SymfonyInsight](https://insight.symfony.com/projects/57dd432d-3d42-449f-baa0-4568abeb3a32/mini.svg)](https://insight.symfony.com/projects/57dd432d-3d42-449f-baa0-4568abeb3a32)
 
 ## How to use it
 This repository contains multiple classes that may be used indepdently but for now it is easier/better to only use the WsSecurity class.

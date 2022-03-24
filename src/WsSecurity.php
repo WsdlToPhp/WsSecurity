@@ -38,6 +38,9 @@ class WsSecurity
         return $this->security;
     }
 
+    /**
+     * @return SoapHeader|SoapVar
+     */
     public static function createWsSecuritySoapHeader(
         string $username,
         string $password,
@@ -81,7 +84,7 @@ class WsSecurity
 
     protected function setPassword(string $password, bool $passwordDigest = false, int $addCreated = 0): self
     {
-        $this->getUsernameToken()->setPassword(new Password($password, $passwordDigest ? Password::TYPE_PASSWORD_DIGEST : Password::TYPE_PASSWORD_TEXT, is_bool($addCreated) ? 0 : ($addCreated > 0 ? $addCreated : 0)));
+        $this->getUsernameToken()->setPassword(new Password($password, $passwordDigest ? Password::TYPE_PASSWORD_DIGEST : Password::TYPE_PASSWORD_TEXT, $addCreated));
 
         return $this;
     }
