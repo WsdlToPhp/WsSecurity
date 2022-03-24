@@ -8,13 +8,13 @@ use DOMElement;
 
 class Security extends Element
 {
-    const NAME = 'Security';
+    public const NAME = 'Security';
 
-    const ATTRIBUTE_MUST_UNDERSTAND = ':mustunderstand';
+    public const ATTRIBUTE_MUST_UNDERSTAND = ':mustunderstand';
 
-    const ATTRIBUTE_ACTOR = ':actor';
+    public const ATTRIBUTE_ACTOR = ':actor';
 
-    const ENV_NAMESPACE = 'SOAP-ENV';
+    public const ENV_NAMESPACE = 'SOAP-ENV';
 
     protected ?UsernameToken $usernameToken = null;
 
@@ -38,7 +38,7 @@ class Security extends Element
      *
      * @param bool $asDomElement returns elements as a DOMElement or as a string
      *
-     * @return DOMElement|string|false
+     * @return DOMElement|false|string
      */
     protected function __toSend(bool $asDomElement = false)
     {

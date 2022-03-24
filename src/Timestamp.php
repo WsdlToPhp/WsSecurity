@@ -8,7 +8,7 @@ use DOMElement;
 
 class Timestamp extends Element
 {
-    const NAME = 'Timestamp';
+    public const NAME = 'Timestamp';
 
     protected ?Created $created;
 
@@ -24,7 +24,7 @@ class Timestamp extends Element
      *
      * @param bool $asDomElement returns elements as a DOMElement or as a string
      *
-     * @return DOMElement|string|false
+     * @return DOMElement|false|string
      */
     protected function __toSend(bool $asDomElement = false)
     {

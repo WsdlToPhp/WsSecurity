@@ -8,9 +8,9 @@ use DOMElement;
 
 class UsernameToken extends Element
 {
-    const NAME = 'UsernameToken';
+    public const NAME = 'UsernameToken';
 
-    const ATTRIBUTE_ID = 'Id';
+    public const ATTRIBUTE_ID = 'Id';
 
     protected ?Username $username = null;
 
@@ -32,7 +32,7 @@ class UsernameToken extends Element
      *
      * @param bool $asDomElement returns elements as a DOMElement or as a string
      *
-     * @return DOMElement|string|false
+     * @return DOMElement|false|string
      */
     protected function __toSend(bool $asDomElement = false)
     {

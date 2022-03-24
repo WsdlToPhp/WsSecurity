@@ -6,13 +6,13 @@ namespace WsdlToPhp\WsSecurity;
 
 class Password extends Element
 {
-    const NAME = 'Password';
+    public const NAME = 'Password';
 
-    const ATTRIBUTE_TYPE = 'Type';
+    public const ATTRIBUTE_TYPE = 'Type';
 
-    const TYPE_PASSWORD_DIGEST = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordDigest';
+    public const TYPE_PASSWORD_DIGEST = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordDigest';
 
-    const TYPE_PASSWORD_TEXT = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText';
+    public const TYPE_PASSWORD_TEXT = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText';
 
     protected string $typeValue;
 
