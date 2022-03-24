@@ -45,7 +45,7 @@
         "phpstan": "vendor/bin/phpstan analyze src --level=6"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.0",
+        "friendsofphp/php-cs-fixer": "^3.0",
         "phpstan/phpstan": "^1.4",
         "phpunit/phpunit": "^9"
     },

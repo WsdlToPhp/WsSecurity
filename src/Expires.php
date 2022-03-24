@@ -6,7 +6,7 @@ namespace WsdlToPhp\WsSecurity;
 
 class Expires extends Element
 {
-    const NAME = 'Expires';
+    public const NAME = 'Expires';
 
     public function __construct(int $timestamp, int $expiresIn = 3600, string $namespace = self::NS_WSSU)
     {

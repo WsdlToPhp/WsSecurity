@@ -6,7 +6,7 @@ namespace WsdlToPhp\WsSecurity;
 
 class Username extends Element
 {
-    const NAME = 'Username';
+    public const NAME = 'Username';
 
     public function __construct(string $username, string $namespace = self::NS_WSSE)
     {

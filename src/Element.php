@@ -15,13 +15,13 @@ use DOMElement;
  */
 class Element
 {
-    const NS_WSSE = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd';
+    public const NS_WSSE = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd';
 
-    const NS_WSSE_NAME = 'wsse';
+    public const NS_WSSE_NAME = 'wsse';
 
-    const NS_WSSU = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd';
+    public const NS_WSSU = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd';
 
-    const NS_WSSU_NAME = 'wssu';
+    public const NS_WSSU_NAME = 'wssu';
 
     protected string $name = '';
 
@@ -79,7 +79,7 @@ class Element
      *
      * @param bool $asDomElement returns elements as a \DOMElement or as a string
      *
-     * @return DOMElement|string|false
+     * @return DOMElement|false|string
      */
     protected function __toSend(bool $asDomElement = false)
     {
@@ -207,7 +207,7 @@ class Element
     /**
      * Returns the element to send as WS-Security header.
      *
-     * @return DOMElement|string|false
+     * @return DOMElement|false|string
      */
     public function toSend()
     {
