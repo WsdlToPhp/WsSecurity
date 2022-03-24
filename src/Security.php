@@ -38,7 +38,7 @@ class Security extends Element
      *
      * @param bool $asDomElement returns elements as a DOMElement or as a string
      *
-     * @return DOMElement|string
+     * @return DOMElement|string|false
      */
     protected function __toSend(bool $asDomElement = false)
     {

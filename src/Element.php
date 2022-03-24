@@ -35,6 +35,8 @@ class Element
 
     /**
      * Array of attributes that must contains the element.
+     *
+     * @var array<string, mixed>
      */
     protected array $attributes = [];
 
@@ -58,6 +60,10 @@ class Element
      */
     protected static ?DOMDocument $dom = null;
 
+    /**
+     * @param mixed                $value
+     * @param array<string, mixed> $attributes
+     */
     public function __construct(string $name, string $namespace, $value = null, array $attributes = [])
     {
         $this
@@ -73,7 +79,7 @@ class Element
      *
      * @param bool $asDomElement returns elements as a \DOMElement or as a string
      *
-     * @return DOMElement|string
+     * @return DOMElement|string|false
      */
     protected function __toSend(bool $asDomElement = false)
     {
@@ -87,12 +93,7 @@ class Element
             ->appendAttributesToElementToSend($element)
         ;
 
-        // Returns element content
-        if ($asDomElement) {
-            return $element;
-        }
-
-        return self::getDom()->saveXML($element);
+        return $asDomElement ? $element : self::getDom()->saveXML($element);
     }
 
     public function getName(): string
@@ -100,18 +101,26 @@ class Element
         return $this->name;
     }
 
-    public function setName($name): self
+    public function setName(string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getAttributes(): array
     {
         return $this->attributes;
     }
 
+    /**
+     * @param array<string, mixed> $attributes
+     *
+     * @return Element
+     */
     public function setAttributes(array $attributes): self
     {
         $this->attributes = $attributes;
@@ -119,6 +128,11 @@ class Element
         return $this;
     }
 
+    /**
+     * @param mixed $value
+     *
+     * @return $this
+     */
     public function setAttribute(string $name, $value): self
     {
         $this->attributes[$name] = $value;
@@ -192,8 +206,10 @@ class Element
 
     /**
      * Returns the element to send as WS-Security header.
+     *
+     * @return DOMElement|string|false
      */
-    public function toSend(): string
+    public function toSend()
     {
         self::setDom(new DOMDocument('1.0', 'UTF-8'));
 
@@ -228,6 +244,9 @@ class Element
         }
     }
 
+    /**
+     * @param array<mixed> $values
+     */
     protected function appendValuesToElementToSend(array $values, DOMElement $element): void
     {
         foreach ($values as $value) {
