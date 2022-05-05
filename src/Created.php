@@ -8,7 +8,7 @@ class Created extends Element
 {
     public const NAME = 'Created';
 
-    public function __construct(int $timestamp, string $namespace = self::NS_WSSU)
+    public function __construct(int $timestamp, string $namespace = self::NS_WSU)
     {
         $this->setTimestampValue($timestamp);
         parent::__construct(self::NAME, $namespace, $this->getTimestampValue(true));

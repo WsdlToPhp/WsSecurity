@@ -14,7 +14,7 @@ class Timestamp extends Element
 
     protected ?Expires $expires;
 
-    public function __construct(string $namespace = self::NS_WSSU)
+    public function __construct(string $namespace = self::NS_WSU)
     {
         parent::__construct(self::NAME, $namespace);
     }
