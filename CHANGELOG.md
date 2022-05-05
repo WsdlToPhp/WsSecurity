@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.0.5 - 2022/05/05
+- Merged PR #15
+
 ## 2.0.4 - 2022/03/24
 - Upgrade PHP CS Fixer
 
