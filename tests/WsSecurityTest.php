@@ -22,13 +22,13 @@ final class WsSecurityTest extends TestCase
             <wsse:UsernameToken>
                 <wsse:Username>foo</wsse:Username>
                 <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">bar</wsse:Password>
-                <wssu:Created xmlns:wssu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-03-31T19:17:04Z</wssu:Created>
+                <wsu:Created xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-03-31T19:17:04Z</wsu:Created>
                 <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">([a-zA-Z0-9=]*)</wsse:Nonce>
             </wsse:UsernameToken>
-            <wssu:Timestamp xmlns:wssu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
-                <wssu:Created>2016-03-31T19:17:04Z</wssu:Created>
-                <wssu:Expires>2016-03-31T19:27:04Z</wssu:Expires>
-            </wssu:Timestamp>
+            <wsu:Timestamp xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+                <wsu:Created>2016-03-31T19:17:04Z</wsu:Created>
+                <wsu:Expires>2016-03-31T19:27:04Z</wsu:Expires>
+            </wsu:Timestamp>
         </wsse:Security>'), $header->data->enc_value);
     }
 
@@ -41,7 +41,7 @@ final class WsSecurityTest extends TestCase
             <wsse:UsernameToken>
                 <wsse:Username>foo</wsse:Username>
                 <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">bar</wsse:Password>
-                <wssu:Created xmlns:wssu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-03-31T19:17:04Z</wssu:Created>
+                <wsu:Created xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-03-31T19:17:04Z</wsu:Created>
                 <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">([a-zA-Z0-9=]*)</wsse:Nonce>
             </wsse:UsernameToken>
         </wsse:Security>'), $header->data->enc_value);
@@ -56,7 +56,7 @@ final class WsSecurityTest extends TestCase
             <wsse:UsernameToken>
                 <wsse:Username>foo</wsse:Username>
                 <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">bar</wsse:Password>
-                <wssu:Created xmlns:wssu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-03-31T19:17:04Z</wssu:Created>
+                <wsu:Created xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-03-31T19:17:04Z</wsu:Created>
                 <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">([a-zA-Z0-9=]*)</wsse:Nonce>
             </wsse:UsernameToken>
         </wsse:Security>'), $header->data->enc_value);
@@ -71,7 +71,7 @@ final class WsSecurityTest extends TestCase
             <wsse:UsernameToken>
                 <wsse:Username>foo</wsse:Username>
                 <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">bar</wsse:Password>
-                <wssu:Created xmlns:wssu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-03-31T19:17:04Z</wssu:Created>
+                <wsu:Created xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-03-31T19:17:04Z</wsu:Created>
                 <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">([a-zA-Z0-9=]*)</wsse:Nonce>
             </wsse:UsernameToken>
         </wsse:Security>'), $header->data->enc_value);
@@ -86,7 +86,7 @@ final class WsSecurityTest extends TestCase
             <wsse:UsernameToken>
                 <wsse:Username>foo</wsse:Username>
                 <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">bar</wsse:Password>
-                <wssu:Created xmlns:wssu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-03-31T19:17:04Z</wssu:Created>
+                <wsu:Created xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-03-31T19:17:04Z</wsu:Created>
                 <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">([a-zA-Z0-9=]*)</wsse:Nonce>
             </wsse:UsernameToken>
         </wsse:Security>'), $header->enc_value);
@@ -101,7 +101,7 @@ final class WsSecurityTest extends TestCase
             <wsse:UsernameToken>
                 <wsse:Username>foo</wsse:Username>
                 <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordDigest">([a-zA-Z0-9=/+]*)</wsse:Password>
-                <wssu:Created xmlns:wssu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-03-31T19:17:04Z</wssu:Created>
+                <wsu:Created xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-03-31T19:17:04Z</wsu:Created>
                 <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">([a-zA-Z0-9=]*)</wsse:Nonce>
             </wsse:UsernameToken>
         </wsse:Security>'), $header->enc_value);
@@ -113,10 +113,10 @@ final class WsSecurityTest extends TestCase
         $this->assertInstanceOf(SoapHeader::class, $header);
         $this->assertMatches(self::innerTrim('
         <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" SOAP-ENV:mustunderstand="1" SOAP-ENV:actor="BAR">
-            <wsse:UsernameToken xmlns:wssu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wssu:Id="X90I3u8">
+            <wsse:UsernameToken xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="X90I3u8">
                 <wsse:Username>foo</wsse:Username>
                 <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">bar</wsse:Password>
-                <wssu:Created xmlns:wssu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-03-31T19:17:04Z</wssu:Created>
+                <wsu:Created xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-03-31T19:17:04Z</wsu:Created>
                 <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">([a-zA-Z0-9=]*)</wsse:Nonce>
             </wsse:UsernameToken>
         </wsse:Security>'), $header->data->enc_value);
@@ -128,10 +128,10 @@ final class WsSecurityTest extends TestCase
         $this->assertInstanceOf(SoapHeader::class, $header);
         $this->assertMatches(self::innerTrim('
         <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" SOAP-ENV:mustunderstand="1" SOAP-ENV:actor="BAR">
-            <wsse:UsernameToken xmlns:wssu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wssu:Id="X90I3u8">
+            <wsse:UsernameToken xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="X90I3u8">
                 <wsse:Username>foo</wsse:Username>
                 <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">bar</wsse:Password>
-                <wssu:Created xmlns:wssu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-03-31T19:17:04Z</wssu:Created>
+                <wsu:Created xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-03-31T19:17:04Z</wsu:Created>
             </wsse:UsernameToken>
         </wsse:Security>'), $header->data->enc_value);
     }
@@ -158,7 +158,7 @@ final class WsSecurityTest extends TestCase
             <wsse:UsernameToken>
                 <wsse:Username>foo</wsse:Username>
                 <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">bar</wsse:Password>
-                <wssu:Created xmlns:wssu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-03-31T19:17:04Z</wssu:Created>
+                <wsu:Created xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-03-31T19:17:04Z</wsu:Created>
                 <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">([a-zA-Z0-9=]*)</wsse:Nonce>
             </wsse:UsernameToken>
         </wsse:Security>'), $header->data->enc_value);

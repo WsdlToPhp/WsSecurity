@@ -19,9 +19,19 @@ class Element
 
     public const NS_WSSE_NAME = 'wsse';
 
+    /**
+     * @deprecated
+     */
     public const NS_WSSU = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd';
 
+    public const NS_WSU = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd';
+
+    /**
+     * @deprecated
+     */
     public const NS_WSSU_NAME = 'wssu';
+
+    public const NS_WSU_NAME = 'wsu';
 
     protected string $name = '';
 
@@ -262,10 +272,10 @@ class Element
 
         foreach ($this->getAttributes() as $attributeName => $attributeValue) {
             $matches = [];
-            if (0 === preg_match(sprintf('/(%s|%s):/', self::NS_WSSU_NAME, self::NS_WSSE_NAME), $attributeName, $matches)) {
+            if (0 === preg_match(sprintf('/(%s|%s):/', self::NS_WSU_NAME, self::NS_WSSE_NAME), $attributeName, $matches)) {
                 $element->setAttribute($attributeName, (string) $attributeValue);
             } else {
-                $element->setAttributeNS(self::NS_WSSE_NAME === $matches[1] ? self::NS_WSSE : self::NS_WSSU, $attributeName, $attributeValue);
+                $element->setAttributeNS(self::NS_WSSE_NAME === $matches[1] ? self::NS_WSSE : self::NS_WSU, $attributeName, $attributeValue);
             }
         }
 
@@ -290,8 +300,8 @@ class Element
 
                 break;
 
-            case self::NS_WSSU:
-                $namespacePrefix = self::NS_WSSU_NAME;
+            case self::NS_WSU:
+                $namespacePrefix = self::NS_WSU_NAME;
 
                 break;
         }
