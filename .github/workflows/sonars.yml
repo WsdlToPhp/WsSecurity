@@ -1,4 +1,4 @@
-name: SonarCloud
+name: Sonars
 on:
     push:
         branches:
@@ -9,10 +9,11 @@ on:
         types: [ opened, synchronize, reopened ]
 jobs:
     sonarcloud:
-        name: SonarCloud
+        name: Sonars
         runs-on: ubuntu-latest
         steps:
-            -   uses: actions/checkout@v2
+            -   name: Checkout code
+                uses: actions/checkout@v2
                 with:
                     fetch-depth: 0
 
@@ -25,15 +26,15 @@ jobs:
             -   name: Install dependencies with composer
                 run: composer update --no-ansi --no-interaction --no-progress
 
-            -   name: Generate coverage report with phpunit/phpunit
+            -   name: Generate coverage report with phpunit
                 run: vendor/bin/phpunit --coverage-clover coverage.xml --log-junit report.xml
 
             -   name: Monitor coverage
                 uses: slavcodev/coverage-monitor-action@v1
                 with:
-                    github_token: ${{ secrets.SECRET_GITHUB_TOKEN }}
+                    github_token: ${{ secrets.ACTIONS_GITHUB_TOKEN }}
                     coverage_path: coverage.xml
-                    threshold_alert: 75
+                    threshold_alert: 90
                     threshold_warning: 95
 
             -   name: Codecov analyze
@@ -47,4 +48,5 @@ jobs:
             -   name: SonarCloud Scan
                 uses: SonarSource/sonarcloud-github-action@master
                 env:
+                    GITHUB_TOKEN: ${{ secrets.ACTIONS_GITHUB_TOKEN }}
                     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
