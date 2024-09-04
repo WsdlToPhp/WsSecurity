@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.0.6 - 2024/09/04
+- PR #20, issue #19 - Attributes on Timestamp
+
 ## 2.0.5 - 2022/05/05
 - Merged PR #15
 
