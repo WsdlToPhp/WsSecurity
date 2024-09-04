@@ -20,7 +20,7 @@ class Password extends Element
     {
         $this
             ->setTypeValue($typeValue)
-            ->setTimestampValue($timestampValue ? $timestampValue : time())
+            ->setTimestampValue($timestampValue ?: time())
             ->setNonceValue((string) mt_rand())
         ;
 

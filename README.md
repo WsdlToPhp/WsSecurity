@@ -44,7 +44,22 @@ The `WsSecurity::createWsSecuritySoapHeader` parameters are defined in this orde
 - **$mustunderstand**: classic option of the [\SoapClient](http://php.net/manual/en/soapclient.soapclient.php) class
 - **$actor**: classic option of the [\SoapClient](http://php.net/manual/en/soapclient.soapclient.php) class
 - **$usernameId**: the id to attach to the UsernameToken element, optional
-- **$addNonce**: _true_ by default, if true, it adds the nonce element to the header, if false it does not add the nonce element to the header 
+- **$addNonce**: _true_ by default, if true, it adds the nonce element to the header, if false it does not add the nonce element to the header
+
+## Alternative usage ##
+Create an instance of the Security class
+```php
+use WsdlToPhp\WsSecurity\WsSecurity;
+
+$wsSecurity = new WsSecurity('login', 'password', true, /*$addCreated*/ time());
+
+// access its properties to alter them
+$wsSecurity->getSecurity()->getTimestamp()->setAttribute('wsu:Id', 'AnyRequestValue');
+
+// Get the SoapHeader
+$header = $security->getSoapHeader($returnSoapHeader = true, $mustunderstand = false, $actor = null);
+```
+
 
 ## Testing using [Docker](https://www.docker.com/)
 Thanks to the [Docker image](https://hub.docker.com/r/splitbrain/phpfarm) of [phpfarm](https://github.com/fpoirotte/phpfarm), tests can be run locally under *any* PHP version using the cli:
@@ -58,9 +73,9 @@ $ docker-compose up -d --build
 You then have a container named `ws_security` in which you can run `composer` commands and `php cli` commands such as:
 ```bash
 # install deps in container (using update ensure it does use the composer.lock file if there is any)
-$ docker exec -it ws_security php-7.4 /usr/bin/composer update
+$ docker exec -it ws_security php /usr/bin/composer update
 # run tests in container
-$ docker exec -it ws_security php-7.4 -dmemory_limit=-1 vendor/bin/phpunit
+$ docker exec -it ws_security php -dmemory_limit=-1 vendor/bin/phpunit
 ```
 
 ## FAQ

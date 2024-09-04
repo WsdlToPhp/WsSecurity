@@ -11,6 +11,8 @@ jobs:
     sonarcloud:
         name: SonarCloud
         runs-on: ubuntu-latest
+        permissions:
+          pull-requests: write
         steps:
             -   uses: actions/checkout@v2
                 with:
@@ -29,6 +31,7 @@ jobs:
                 run: vendor/bin/phpunit --coverage-clover coverage.xml --log-junit report.xml
 
             -   name: Monitor coverage
+                if: false
                 uses: slavcodev/coverage-monitor-action@v1
                 with:
                     github_token: ${{ secrets.SECRET_GITHUB_TOKEN }}

@@ -10,9 +10,9 @@ class Timestamp extends Element
 {
     public const NAME = 'Timestamp';
 
-    protected ?Created $created;
+    protected ?Created $created = null;
 
-    protected ?Expires $expires;
+    protected ?Expires $expires = null;
 
     public function __construct(string $namespace = self::NS_WSU)
     {
