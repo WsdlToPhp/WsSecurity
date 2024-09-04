@@ -11,7 +11,7 @@ class WsSecurity
 {
     protected Security $security;
 
-    protected function __construct(
+    public function __construct(
         string $username,
         string $password,
         bool $passwordDigest = false,
@@ -55,15 +55,21 @@ class WsSecurity
         string $envelopeNamespace = Security::ENV_NAMESPACE
     ) {
         $self = new WsSecurity($username, $password, $passwordDigest, $addCreated, $addExpires, $mustUnderstand, $actor, $usernameId, $addNonce, $envelopeNamespace);
+
+        return $self->getSoapHeader($returnSoapHeader, $mustUnderstand, $actor);
+    }
+
+    public function getSoapHeader(bool $returnSoapHeader = true, bool $mustUnderstand = false, ?string $actor = null): object
+    {
         if ($returnSoapHeader) {
             if (!empty($actor)) {
-                return new SoapHeader(Element::NS_WSSE, Security::NAME, new SoapVar($self->getSecurity()->toSend(), XSD_ANYXML), $mustUnderstand, $actor);
+                return new SoapHeader(Element::NS_WSSE, Security::NAME, new SoapVar($this->getSecurity()->toSend(), XSD_ANYXML), $mustUnderstand, $actor);
             }
 
-            return new SoapHeader(Element::NS_WSSE, Security::NAME, new SoapVar($self->getSecurity()->toSend(), XSD_ANYXML), $mustUnderstand);
+            return new SoapHeader(Element::NS_WSSE, Security::NAME, new SoapVar($this->getSecurity()->toSend(), XSD_ANYXML), $mustUnderstand);
         }
 
-        return new SoapVar($self->getSecurity()->toSend(), XSD_ANYXML);
+        return new SoapVar($this->getSecurity()->toSend(), XSD_ANYXML);
     }
 
     protected function initSecurity(bool $mustUnderstand = false, ?string $actor = null, string $envelopeNamespace = Security::ENV_NAMESPACE): self
@@ -115,12 +121,18 @@ class WsSecurity
     protected function setTimestamp(int $addCreated = 0, int $addExpires = 0): self
     {
         $timestampValue = $this->getPassword()->getTimestampValue();
-        if ($addCreated && $addExpires && $timestampValue) {
-            $timestamp = new Timestamp();
-            $timestamp->setCreated(new Created($timestampValue));
-            $timestamp->setExpires(new Expires($timestampValue, $addExpires));
-            $this->security->setTimestamp($timestamp);
+        if (!$timestampValue || (0 === $addCreated && 0 === $addExpires)) {
+            return $this;
         }
+
+        $timestamp = new Timestamp();
+        if (0 < $addCreated) {
+            $timestamp->setCreated(new Created($timestampValue));
+        }
+        if (0 < $addExpires) {
+            $timestamp->setExpires(new Expires($timestampValue, $addExpires));
+        }
+        $this->security->setTimestamp($timestamp);
 
         return $this;
     }
